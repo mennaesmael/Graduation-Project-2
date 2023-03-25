@@ -1,14 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 
 <head>
-    <title>Upload</title>
+    <title>رفع الملفات</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <style>
+        body {
+            direction: rtl;
+            background-color: #F5F5F5;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 40px;
+        }
+
         table {
             border-collapse: separate;
             border-spacing: 0 20px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         td {
@@ -24,6 +51,7 @@
             background-color: #007bff;
             color: #fff;
             font-weight: bold;
+            text-align: center;
         }
 
         .form-control {
@@ -31,67 +59,128 @@
             background-color: #ffffff;
             color: #000000;
             border: none;
+            border-radius: 5px;
+            height: 40px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         .form-control:focus {
             background-color: #ffffff;
             color: #000000;
             border: none;
+            outline: none;
         }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            cursor: pointer;
+        }
+
+        label.error {
+            color: red;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 15px;
+        }
+        .file-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.file-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #555;
+  background-color: #f9f9f9;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.file-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #4c8bf5;
+}
+
     </style>
 </head>
 
-<body style="background-color: #ffffff; color: #000000;">
+<body>
+    @include('layouts.navigation')
+
     <div class="container">
-        <h1 class="mt-4 mb-4">Upload File</h1>
+        <h1>رفع الملفات</h1>
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
-        <form method="POST" action="{{ route('upload') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('upload') }}" enctype="multipart/form-data" id="upload-form">
             @csrf
             <table>
                 <tr>
-                    <td class="table-header">File Name</td>
+                    <td class="table-header" colspan="2">بيانات الملف</td>
+                </tr>
+                <tr>
+                    <td class="table-header">اسم الملف*</td>
+                    <td><input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus></td>
+                </tr>
+                <tr>
+                    <td class="table-header">اختر ملف*</td>
                     <td>
-                        <input id="name" type="text" class="form-control" name="name"
-                            value="{{ old('name') }}" required autofocus>
-                        @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <div class="file-input-container">
+                            <label for="file" class="file-label">Choose a file:</label>
+                            <input id="file" name="file" class="file-input" aria-describedby="file_input_help" type="file" required>
+                          </div>
+
                     </td>
                 </tr>
                 <tr>
-                    <td class="table-header">Notes</td>
-                    <td>
-                        <textarea id="notes" name="notes" class="form-control" rows="4" cols="50" autofocus>{{ old('notes') }}</textarea>
-                        @error('notes')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-header">choose files</td>
-                    <td>
-
-
-                        <input id="file" name="file"
-                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 @error('file') is-invalid @enderror"
-                            aria-describedby="file_input_help" type="file"required>
-
-                        @error('file')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-
-                    </td>
+                    <td class="table-header">ملاحظات</td>
+                    <td><textarea id="notes" name="notes" class="form-control" rows="4" cols="50">{{ old('notes') }}</textarea></td>
                 </tr>
             </table>
-            <button type="submit" class="btn btn-primary mt-3">{{ __('Upload') }}</button>
+            <button type="submit" class="btn btn-primary">{{ __('رفع') }}</button>
         </form>
         <br>
         @if (session('success'))
@@ -99,15 +188,15 @@
         <script>
             Swal.fire({
                 title: "Success!",
-                text: "{{ session('success') }}",
+                text: "{{ session('تم بنجاح') }}",
                 icon: "success",
                 confirmButtonText: "OK"
             });
         </script>
     @endif
 
-        <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">{{ __('Dashboard') }}</a>
-        <a href="{{ route('search') }}" class="btn btn-primary mt-3 ml-3">{{ __('Search') }}</a>
+        <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">{{ __('الصفحة الرئيسية') }}</a>
+        <a href="{{ route('search') }}" class="btn btn-primary mt-3 ml-3">{{ __('صفحة البحث') }}</a>
     </div>
 </body>
 

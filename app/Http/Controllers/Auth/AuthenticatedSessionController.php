@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\user_table;
+use App\Models\User; // Import the User model
 
 class AuthenticatedSessionController extends Controller
 {
@@ -27,10 +29,19 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // Update last_login timestamp for the authenticated user
+         /** @var User $user */
+        $user = Auth::user();
+        $user->last_login = now('Africa/Cairo');
+        $user->save();
+
+        user_table::where('user_id', '<>', $user->user_id)->update(['last_login' => null]);
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
+
 
     /**
      * Destroy an authenticated session.

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-
+use Illuminate\Validation\Rule;
 class RegisteredUserController extends Controller
 {
     /**
@@ -32,6 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'admin' => ['required', 'string', Rule::in(['نعم', 'لا'])],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.user_table::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -39,6 +40,7 @@ class RegisteredUserController extends Controller
         $user = user_table::create([
             'name' => $request->name,
             'email' => $request->email,
+            'admin' => $request->admin,
             'password' => Hash::make($request->password),
         ]);
 

@@ -15,7 +15,7 @@ class user_table extends Model implements Authenticatable
         'name',
         'email',
         'password',
+        'admin',
     ];
     public $timestamps = false;
 }
-

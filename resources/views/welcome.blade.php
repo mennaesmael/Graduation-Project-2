@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
 
 <head>
     <meta charset="utf-8">
@@ -847,33 +847,25 @@
 </head>
 
 <body class="antialiased">
-    <div
-        class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter light:bg-gray-900 selection:bg-red-500 selection:text-white">
-        @if (Route::has('login'))
-            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                        in</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
+    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter light:bg-gray-900 selection:bg-red-500 selection:text-white">
+        <div class="text-center">
+            <span style="animation: moveInPlace 2s infinite;"> اهلا بكم فى قواعد البيانات</span>
+            @if (Route::has('login'))
+                <div class=" flex-col items-center mt-6">
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">الصفحة الرئيسية</a>
+                    @else
+                    <a href="{{ route('login') }}" class="inline-block px-6 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:ring ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-100 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-offset-gray-800">{{ __('تسجيل دخول') }}</a>
 
 
-
-
-
-        <span style="animation: moveInPlace 2s infinite;"> Welcome to File management system<span>
-
-
+               
+                    @endauth
+                </div>
+            @endif
+        </div>
+    </div>
 </body>
+
 
 </html>
