@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->increments('file_id',10);
-            $table->integer('user_id',5)->index();
+   
             $table->string('user_name',255);
             $table->string('file_name',600)->index('Idx_file_name', 'FULLTEXT');
             $table->string('file_path',300);
@@ -27,7 +27,7 @@ return new class extends Migration
 
             $table->string('updated_by',255)->nullable();
 
-            $table->foreign('user_id')->references('user_id')->on('users');
+      
             $table->index('file_name');
         });
     }
