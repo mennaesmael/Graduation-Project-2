@@ -1,6 +1,6 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 class="text-lg font-medium text-gray-900 ">
             {{ __('تحديث كلمة المرور') }}
         </h2>
 
@@ -32,7 +32,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('حقظ') }}</x-primary-button>
+            <x-primary-button>{{ __('حفظ') }}</x-primary-button>
 
             @if (session('status') === 'password-updated')
                 <p

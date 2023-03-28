@@ -14,9 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('track_users', function (Blueprint $table) {
-            $table->bigIncrements('id',20);
-            $table->integer('user_id',5)->index();
-            $table->integer('file_id',10)->nullable()->index();
+            $table->bigIncrements('id');
+            $table->integer('user_id')->index();
+            $table->integer('file_id')->nullable()->index();
             $table->string('action', 300);
             $table->string('search_input', 255)->nullable();
             $table->string('updated_by', 255)->nullable();

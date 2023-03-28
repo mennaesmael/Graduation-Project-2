@@ -3,100 +3,165 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
     <title>
         لوحة القيادة
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-        name='viewport' />
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  
+  
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="../assets/demo/demo.css" rel="stylesheet" />
+   
 </head>
 <body class="">
-    <div class="wrapper ">
-        <div class="sidebar" data-color="orange">
-            <div class="sidebar-wrapper" id="sidebar-wrapper">
-                <ul class="nav">
-                    <li class="active">
-                        <a href="./dashboard">
-                            <i class="now-ui-icons design_app"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        @if (Route::has('register'))
-                            @auth
-                                <a href="{{ route('register') }}">{{ __(' create users ') }}
-                                    <i class="now-ui-icons ui-1_bell-53"></i>
-                                </a>
-                            @endauth
-                        @endif
-
-                    </li>
-                    <li>
-                        <a href="./user">
-                            <i class="now-ui-icons users_single-02"></i>
-                            <p>Workers</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./tables">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                            <p>Tracking users</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../dashboard">
-                            <i class="now-ui-icons business_globe"></i>
-                            <p>Main dashboard</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    
+<footer  class="bg-neutral-100  text-neutral-600 dark:bg-gray-900 dark:text-neutral-200 lg:text-left absolute inset-x-0 bottom-0 ">
+    <div class="bg-neutral-200 p-6 text-left dark:bg-gray-900  ">
+        <span class="ml-96">المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
+      
+       
+      </div>
+  </footer>
+  <div class="grid grid-cols-5  ">
+  
+  
+  
+      <div class="">
+      
+          <!-- Sidenav -->
+          <nav
+          id="sidenav-7"
+          class="fixed top-0 right-0 h-screen w-80 translate-x-full overflow-hidden bg-white 
+          shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:-translate-x-0 dark:bg-zinc-800"
+          data-te-sidenav-init
+          data-te-sidenav-hidden="false"
+          data-te-sidenav-right="true">
+          <ul
+            class="relative m-0 list-none px-[0.2rem]"
+            data-te-sidenav-menu-ref>
+            <li class="relative">
+              <a
+                class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                 text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 
+                 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none
+                  active:bg-slate-50 active:text-inherit
+                   active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none
+                    motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10
+                     dark:active:bg-white/10"
+                data-te-sidenav-link-ref>
+           
+                <img src="{{URL::asset('/images/وزارة السياحة والاثار مصر.png')}}" alt="Logo" class="w-40 items-center m-auto  " >
+                
+              </a>
+              <hr>
+            </li>
+            <li class="relative">
+              <a
+                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                 text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit 
+                 hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 
+                 active:text-inherit 
+                 active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                data-te-sidenav-link-ref>
+               
+                <span class=" text-black text-center text-lg font-semibold">رفع ملف</span>
+               
+              </a>
+             
+            </li>
+            <hr>
+            <li class="relative">
+              <a
+                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                 text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                  focus:bg-slate-50 focus:text-inherit focus:outline-none
+                   active:bg-slate-50 active:text-inherit
+                    active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                    motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                data-te-sidenav-link-ref>
+                
+                <span class=" text-black text-center text-lg font-semibold">بحث عن ملف</span>
+               
+              </a>
+             
+            </li>
+            <hr>
+            <li class="relative">
+              <a
+                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                 text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                  focus:bg-slate-50 focus:text-inherit focus:outline-none
+                   active:bg-slate-50 active:text-inherit
+                    active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                    motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                data-te-sidenav-link-ref>
+                
+                <span class=" text-black text-center text-lg font-semibold">تسجيل مستخدم</span>
+               
+              </a>
+             
+            </li>
+  
+            <hr>
+            <li class="relative">
+              <a
+                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                 text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                  focus:bg-slate-50 focus:text-inherit focus:outline-none
+                   active:bg-slate-50 active:text-inherit
+                    active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                    motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                data-te-sidenav-link-ref>
+                
+                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
+               
+              </a>
+             
+            </li>
+  
+            <hr>
+            <li class="relative">
+              <a
+                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                 text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                  focus:bg-slate-50 focus:text-inherit focus:outline-none
+                   active:bg-slate-50 active:text-inherit
+                    active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                    motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                data-te-sidenav-link-ref>
+                
+                <span class=" text-black text-center text-lg font-semibold">  نشاط المستخدمين</span>
+               
+              </a>
+             
+            </li>
+          </ul>
+        </nav>
+        <!-- Sidenav -->
         </div>
-        <div class="main-panel" id="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
-                <div class="container-fluid">
-                    <div class="navbar-wrapper">
-                        <a class="navbar-brand" href="#pablo">جدول الموظفين</a>
-                    </div>
-
-                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                        <form method="get" action="{{ route('workers') }}">
-                            <div class="input-group no-border">
-                                <input type="text" value="{{ request('user_id') }}" name="user_id" class="form-control" placeholder="Search by User ID...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="now-ui-icons ui-1_zoom-bold"></i> Search
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-
-
-                    </div>
-                </div>
-            </nav>
-            <!-- End Navbar -->
-            <div class="panel-header panel-header-sm">
+        
+  <div class="col-span-4">
+    
+    <x-app-layout >
+      <div class="">
+          <x-slot name="header ">
+              <h2 class="font-bold text-xl text-gray-800  leading-tight ">
+                  {{ __('الصفحة الرئيسية') }}
+              </h2>
+          </x-slot>
+      
+  
+          <div class="w-9/12  mr-48 mt-7 text-center">
+            <div class="">
             </div>
             <div class="content">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> workers</h4>
+                                <p class="card-title text-2xl font-bold"> المستخدمين</p>
                             </div>
                             <div class="card-body">
                                 @if ($users->isEmpty())
@@ -107,11 +172,11 @@
                                         <thead class="text-primary">
                                             <tr>
                                                 <th>User_ID</th>
-                                                <th>name</th>
-                                                <th>admin</th>
-                                                <th>email</th>
-                                                <th>Created At</th>
-                                                <th>last login</th>
+                                                <th>الأسم</th>
+                                                <th>الأدمن</th>
+                                                <th>الإيميل</th>
+                                                <th>تم انشائه في</th>
+                                                <th>أخر تسجيل دخول</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -134,6 +199,27 @@
                         </div>
                     </div>
                 </div>
+
+
+
+        </div>
+    </x-app-layout>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <!--   Core JS Files   -->
                 <script src="../assets/js/core/jquery.min.js"></script>
                 <script src="../assets/js/core/popper.min.js"></script>
@@ -145,9 +231,7 @@
                 <script src="../assets/js/plugins/chartjs.min.js"></script>
                 <!--  Notifications Plugin    -->
                 <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-                <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-                <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-                <script src="../assets/demo/demo.js"></script>
+                
 </body>
 
 </html>

@@ -13,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('files', function (Blueprint $table) {
-            $table->increments('file_id',10);
-   
+            $table->increments('file_id');
+            $table->integer('user_id')->index();
             $table->string('user_name',255);
             $table->string('file_name',600)->index('Idx_file_name', 'FULLTEXT');
             $table->string('file_path',300);
             $table->string('file_extension',10);
-            $table->integer('file_size',8);
+            $table->integer('file_size');
             $table->text('notes')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('updated_at');
@@ -27,8 +27,7 @@ return new class extends Migration
 
             $table->string('updated_by',255)->nullable();
 
-      
-            $table->index('file_name');
+           
         });
     }
 

@@ -1,204 +1,267 @@
 <!DOCTYPE html>
-<html lang="ar">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
 <head>
-    <title>رفع الملفات</title>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        body {
-            direction: rtl;
-            background-color: #F5F5F5;
-            color: #333;
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            margin-top: 50px;
-        }
-
-        h1 {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        form {
-            margin-bottom: 40px;
-        }
-
-        table {
-            border-collapse: separate;
-            border-spacing: 0 20px;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        td {
-            padding: 10px;
-            vertical-align: middle;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            color: #333;
-        }
-
-        .table-header {
-            background-color: #007bff;
-            color: #fff;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .form-control {
-            width: 100%;
-            background-color: #ffffff;
-            color: #000000;
-            border: none;
-            border-radius: 5px;
-            height: 40px;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-        }
-
-        .form-control:focus {
-            background-color: #ffffff;
-            color: #000000;
-            border: none;
-            outline: none;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .btn-primary:hover {
-            background-color: #0069d9;
-            cursor: pointer;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-            cursor: pointer;
-        }
-
-        label.error {
-            color: red;
-            font-size: 14px;
-            display: block;
-            margin-bottom: 15px;
-        }
-        .file-input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.file-label {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.file-input {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #555;
-  background-color: #f9f9f9;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  transition: all 0.3s ease-in-out;
-}
-
-.file-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #4c8bf5;
-}
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>رفع الملفات</title>  
+  <!-- CSS Files -->
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+ 
+  
 </head>
-
 <body>
-    @include('layouts.navigation')
-
-    <div class="container">
-        <h1>رفع الملفات</h1>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <form method="POST" action="{{ route('upload') }}" enctype="multipart/form-data" id="upload-form">
-            @csrf
-            <table>
-                <tr>
-                    <td class="table-header" colspan="2">بيانات الملف</td>
-                </tr>
-                <tr>
-                    <td class="table-header">اسم الملف*</td>
-                    <td><input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus></td>
-                </tr>
-                <tr>
-                    <td class="table-header">اختر ملف*</td>
-                    <td>
-                        <div class="file-input-container">
-                            <label for="file" class="file-label">Choose a file:</label>
-                            <input id="file" name="file" class="file-input" aria-describedby="file_input_help" type="file" required>
-                          </div>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-header">ملاحظات</td>
-                    <td><textarea id="notes" name="notes" class="form-control" rows="4" cols="50">{{ old('notes') }}</textarea></td>
-                </tr>
-            </table>
-            <button type="submit" class="btn btn-primary">{{ __('رفع') }}</button>
-        </form>
-        <br>
-        @if (session('success'))
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            Swal.fire({
-                title: "Success!",
-                text: "{{ session('تم بنجاح') }}",
-                icon: "success",
-                confirmButtonText: "OK"
-            });
-        </script>
-    @endif
-
-        <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">{{ __('الصفحة الرئيسية') }}</a>
-        <a href="{{ route('search') }}" class="btn btn-primary mt-3 ml-3">{{ __('صفحة البحث') }}</a>
+ 
+<footer  class="bg-neutral-100  text-neutral-600 dark:bg-gray-900 dark:text-neutral-200 lg:text-left absolute inset-x-0 bottom-0 ">
+  <div class="bg-neutral-200 p-6 text-left dark:bg-gray-900  ">
+      <span class="ml-96">المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
+    
+     
     </div>
+</footer>
+<div class="grid grid-cols-5  ">
+
+
+
+    <div class="">
+    
+        <!-- Sidenav -->
+        <nav
+        id="sidenav-7"
+        class="fixed top-0 right-0 h-screen w-80 translate-x-full overflow-hidden bg-white 
+        shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:-translate-x-0 dark:bg-zinc-800"
+        data-te-sidenav-init
+        data-te-sidenav-hidden="false"
+        data-te-sidenav-right="true">
+        <ul
+          class="relative m-0 list-none px-[0.2rem]"
+          data-te-sidenav-menu-ref>
+          <li class="relative">
+            <a
+              class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+               text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 
+               hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none
+                active:bg-slate-50 active:text-inherit
+                 active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none
+                  motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10
+                   dark:active:bg-white/10"
+              data-te-sidenav-link-ref>
+         
+              <img src="{{URL::asset('/images/وزارة السياحة والاثار مصر.png')}}" alt="Logo" class="w-40 items-center m-auto  " >
+              
+            </a>
+            <hr>
+          </li>
+          <li class="relative">
+            <a
+              class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+               text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit 
+               hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 
+               active:text-inherit 
+               active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+               motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+              data-te-sidenav-link-ref  href="{{ route('upload') }}">
+             
+              <span class=" text-black text-center text-lg font-semibold">رفع ملف</span>
+             
+            </a>
+           
+          </li>
+          <hr>
+          <li class="relative">
+            <a
+              class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+               text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                focus:bg-slate-50 focus:text-inherit focus:outline-none
+                 active:bg-slate-50 active:text-inherit
+                  active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                  motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+              data-te-sidenav-link-ref  href="{{ route('search') }}">
+              
+              <span class=" text-black text-center text-lg font-semibold">بحث عن ملف</span>
+             
+            </a>
+           
+          </li>
+          <hr>
+          <li class="relative">
+            <a
+              class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+               text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                focus:bg-slate-50 focus:text-inherit focus:outline-none
+                 active:bg-slate-50 active:text-inherit
+                  active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                  motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+              data-te-sidenav-link-ref>
+              
+              <span class=" text-black text-center text-lg font-semibold">تسجيل مستخدم</span>
+             
+            </a>
+           
+          </li>
+
+          <hr>
+          <li class="relative">
+            <a
+              class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+               text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                focus:bg-slate-50 focus:text-inherit focus:outline-none
+                 active:bg-slate-50 active:text-inherit
+                  active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                  motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+              data-te-sidenav-link-ref>
+              
+              <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
+             
+            </a>
+           
+          </li>
+
+          <hr>
+          <li class="relative">
+            <a
+              class="flex h-12 cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+               text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none
+                focus:bg-slate-50 focus:text-inherit focus:outline-none
+                 active:bg-slate-50 active:text-inherit
+                  active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none 
+                  motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+              data-te-sidenav-link-ref>
+              
+              <span class=" text-black text-center text-lg font-semibold">  نشاط المستخدمين</span>
+             
+            </a>
+           
+          </li>
+        </ul>
+      </nav>
+      <!-- Sidenav -->
+      </div>
+      
+<div class="col-span-4">
+  
+  <x-app-layout >
+    <div class="">
+        <x-slot name="header ">
+            <h2 class="font-bold text-xl text-gray-800  leading-tight ">
+                {{ __('الصفحة الرئيسية') }}
+            </h2>
+        </x-slot>
+    
+        <div class="card m-14 mr-20" style="width: 80%">
+
+            <p class="card-category text-2xl font-semibold text-black text-center m-4">رفع  ملف</p>
+                 
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            <form method="POST" action="{{ route('upload') }}" enctype="multipart/form-data" id="upload-form" class="m-3">
+                @csrf
+                <table class="table text-right">
+                   
+                    <tr class="my-9">
+                        <td class="table-header text-lg font-semibold">اسم الملف:<span class="text-red-600">*</span> </td>
+                        <td><input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus></td>
+                    </tr>
+                    <tr class="my-9">
+                        <td class="table-header text-lg font-semibold">اختر الملف:<span class="text-red-600">*</span></td>
+                        <td>
+                            <div class="file-input-container">
+                                <label for="file" class="file-label"></label>
+                                <input id="file" name="file" class="file-input" aria-describedby="file_input_help" type="file" required>
+                              </div>
+    
+                        </td>
+                    </tr>
+                    <tr class="my-9">
+                        <td class="table-header text-lg font-semibold">ملاحظات</td>
+                        <td><textarea id="notes" name="notes" class="form-control 
+                             focus:border-indigo-500 focus:ring-indigo-500 " rows="4" cols="50">{{ old('notes') }}</textarea></td>
+ 
+                </table>
+
+  
+                <button type="submit" class="btn btn-outline-primary btn-lg ">{{ __('رفع') }}</button>
+            </form>
+            <br>
+            @if (session('success'))
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                Swal.fire({
+                    title: "Success!",
+                    text: "{{ session('تم بنجاح') }}",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                });
+            </script>
+        @endif
+    
+        </div>
+
+
+
+{{--         
+        <div class="py-12">
+            
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white 0 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 ">
+                        <a href="{{ route('upload') }}">{{ __("اذهب الي صفحة رفع الملفات") }}</a>
+                    </div>
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <a href="{{ route('search') }}">{{ __("اذهب الي صفحة البحث") }}</a>
+                    </div>
+                    @can('admin')
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <a href="{{ route('admin.dashboard') }}">ادارة قاعدة البيانات</a>
+                    </div>
+                    @endcan
+                </div>
+            </div>
+        </div>
+    </div> --}}
+  
+</x-app-layout>
+</div>
+
+</div>
+
+
+  
+
+
+
+
 </body>
 
+
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
