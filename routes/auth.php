@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
+        Route::get('dashboard', [admin_dashboard::class, 'get_information'])->name('dashboard');
 
     Route::middleware('can:admin')->group(function () {
         Route::get('register', [RegisteredUserController::class, 'create'])
@@ -64,8 +65,9 @@ Route::middleware('auth')->group(function () {
 
         Route::post('register', [RegisteredUserController::class, 'store']);
 
-        Route::get('/admin/dashboard', [admin_dashboard::class, 'get_information'])->name('admin.dashboard');
         Route::get('/admin/tables', [actions::class, 'index'])->name('tracking');
         Route::get('/admin/user', [actions::class, 'Show_users'])->name('workers');
+                Route::post('/make-admin/{user_id}', [actions::class,'makeAdmin']);
+
     });
 });

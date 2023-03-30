@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\user_table;
+use App\Models\track_user;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -46,7 +47,11 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        $track = new track_user();
+        $track->action = 'register';
+        $track->user_id =Auth::user()->user_id;
+        $track->New_User_Registerd = $request->name;
+        $track->save();
 
         return redirect(RouteServiceProvider::HOME);
     }

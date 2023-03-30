@@ -35,9 +35,9 @@ class PasswordResetLinkController extends Controller
         $status = Password::sendResetLink(
             $request->only('email')
         );
-
+        $statusMessage = 'تم ارسال رابط اعادة تعيين كلمة المرور الي البريد الالكتروني الخاص بك';
         return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
+                    ? back()->with('status',$statusMessage)
                     : back()->withInput($request->only('email'))
                             ->withErrors(['email' => __($status)]);
     }

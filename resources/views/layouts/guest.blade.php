@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'إدارة الحفائر قطاع الآثار المصرية') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,7 +17,7 @@
     <body class="font-sans text-gray-900 antialiased">
         <div class="  sm:justify-center items-center  sm:pt-0 bg-gray-100 light:bg-gray-900">
             <div>
-              
+
             </div>
 
             <div class="w-full max-w-screen-lg mt-6 px-6 py-4 bg-white dark:bg-transparent shadow-md overflow-hidden sm:rounded-lg">

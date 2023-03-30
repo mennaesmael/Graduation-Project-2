@@ -32,7 +32,7 @@ Route::get('/search', [Search_delete_updateController::class, 'search'])->middle
 // Route::get('/files/{id}/update', [SearchController::class, 'showUpdateForm'])->name('update');
 Route::get('/update/{file_id}', [Search_delete_updateController::class, 'showUpdateForm'])->middleware(['auth', 'verified'])->name('update');
 Route::post('/update/{file_id}', [Search_delete_updateController::class, 'update'])->middleware(['auth', 'verified'])->name('update');
-
+Route::get('/suggestions', [Search_delete_updateController::class, 'suggestions'])->middleware(['auth', 'verified'])->name('suggestions');
 // Route to delete a file
 Route::delete('/files/{file}/delete', [Search_delete_updateController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete');
 

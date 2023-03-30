@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'إدارة الحفائر قطاع الآثار المصرية'),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+
 
 
         /*
@@ -212,6 +214,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Scout' => Laravel\Scout\Facades\Scout::class,
+
     ])->toArray(),
 
 ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\track_user;
 use App\Http\Controllers\Controller;
 use App\Models\user_table;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class actions extends Controller
@@ -34,5 +35,18 @@ class actions extends Controller
 
         return view('admin.user', compact('users'));
     }
+    public function makeAdmin($user_id)
+    {
+        $user = User::find($user_id);
 
+        if ($user->admin == 'نعم') {
+            $user->admin = 'لا';
+            $user->save();
+            return back();
+        } else {
+            $user->admin = 'نعم';
+            $user->save();
+            return back();
+        }
+    }
 }

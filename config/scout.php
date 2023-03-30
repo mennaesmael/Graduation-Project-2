@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'algolia'),
+    'driver' => env('SCOUT_DRIVER', 'elastic'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'queue' => env('SCOUT_QUEUE', false),
+    'queue' => env('SCOUT_QUEUE', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -138,5 +138,16 @@ return [
             // ],
         ],
     ],
+
+    'elasticsearch' => [
+        'index' => env('ELASTICSEARCH_INDEX', 'laravel'),
+        'config' => [
+            'hosts' => [
+                env('ELASTICSEARCH_HOST', 'localhost:9200'),
+            ],
+        ],
+    ],
+
+
 
 ];

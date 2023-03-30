@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Models\files_table;
+use App\Models\FilesTable;
 use App\Models\track_user;
 
 class FilesController extends Controller
@@ -14,14 +14,20 @@ class FilesController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'file' => 'required|mimes:pdf|max:61440',
+        ], [
+            'file.mimes' => 'الملف يجب ان يكون بصيغة pdf',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
         $path = $file->storeAs('uploaded/files', $fileName);
         // Save the file details to the database
-        $fileRecord = new files_table;
+        $fileRecord = new FilesTable;
         $fileRecord->file_name = $request->name;
         $user = Auth::user();
         if ($user) {
@@ -40,12 +46,12 @@ class FilesController extends Controller
         $track->user_id = $user->user_id;
         $track->file_id = $fileRecord->file_id;
         $track->save();
-        return redirect()->route('upload')->with('success', 'File ' . $fileName . ' uploaded successfully.');
+        return redirect()->route('upload')->with('success', 'ملف ' . $fileName . 'تم بنجاح رفع');
     }
 
     public function getFilesByMonth()
     {
-        $filesByMonth = files_table::selectRaw('COUNT(*) as count, YEAR(created_at) as year, MONTH(created_at) as month')
+        $filesByMonth = FilesTable::selectRaw('COUNT(*) as count, YEAR(created_at) as year, MONTH(created_at) as month')
             ->groupBy('year', 'month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')

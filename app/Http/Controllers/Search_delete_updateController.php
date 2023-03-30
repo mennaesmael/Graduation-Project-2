@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\track_user;
-use App\Models\files_table;
+use App\Models\FilesTable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use Elastic\ScoutDriverPlus\Support\Query;
+
 
 class Search_delete_updateController extends Controller
 {
+    // search method
     public function search(Request $request)
     {
         $file_query = $request->input('query');
@@ -47,52 +48,58 @@ class Search_delete_updateController extends Controller
             $track->search_input = $user_query;
             $track->save();
         }
+        $isSearched = request()->input('searched') == '1';
 
-        if ($request->has('searched') && empty($file_query) && empty($user_query)) {
-            // Display all files in the database
-            $files = DB::table('files')->paginate(3);
-        } elseif (!empty($file_query) || !empty($user_query)) {
-            // Display relevant results based on input
-            $files = DB::table('files')
-                ->when(!empty($file_query), function ($query) use ($file_query) {
-                    return $query->where('file_name', 'LIKE', '%' . $file_query . '%');
-                })
-                ->when(!empty($user_query), function ($query) use ($user_query) {
-                    return $query->where(function ($innerQuery) use ($user_query) {
-                        $innerQuery->where('user_name', 'LIKE', '%' . $user_query . '%')
-                            ->orWhere('user_id', 'LIKE', '%' . $user_query . '%');
-                    });
-                })
-                ->orderBy('file_name', 'asc')
-                ->paginate(3);
+        $query = Query::bool()
+            ->when(!empty($file_query) || !empty($user_query), function ($builder) use ($file_query, $user_query) {
+                if (!empty($file_query)) {
+                    $builder->must(
+                        Query::match()
+                            ->field('file_name')
+                            ->query($file_query)
+                            ->fuzziness(2)
+                            ->boost(3)
+                    );
+                }
+
+                if (!empty($user_query)) {
+                    $userSearch = Query::bool()->should(
+                        Query::match()
+                            ->field('user_name')
+                            ->query($user_query)
+                            ->fuzziness(0)
+                            ->boost(2)
+                    );
+
+                    if (ctype_digit($user_query)) {
+                        $userSearch->should(
+                            Query::term()->field('user_id')->value($user_query)
+                        );
+                    }
+
+                    $userSearch->minimumShouldMatch(1);
+                    $builder->must($userSearch);
+                }
+            }, function ($builder) {
+                return $builder->must(Query::matchAll());
+            });
+
+        // Execute Elasticsearch query and get the models
+        if ($isSearched) {
+            $searchResult = FilesTable::searchQuery($query)->execute();
+            $files = FilesTable::searchQuery($query)->paginate(40);
         } else {
-            // Don't display any files
+            $searchResult = [];
             $files = [];
         }
 
         return view('search', compact('files', 'file_query', 'user_query'));
     }
-
-
-
-
-    public function destroy(files_table $file)
-    {
-
-        // Record the delete action in the track table
-        $track = new track_user();
-        $track->file_id = $file->file_id;
-        $track->action = 'delete';
-        $track->user_id = Auth::user()->user_id;
-        $track->save();
-        // Redirect back to the file listing page
-        return redirect()->route('search')->with('success', 'File has been deleted');
-    }
-
+    //view update page
     public function showUpdateForm($id)
     {
         // Get the file to be updated from the database
-        $file = files_table::findOrFail($id);
+        $file = FilesTable::findOrFail($id);
 
         // Pass the file data to the update form view
         return view('update', [
@@ -100,13 +107,22 @@ class Search_delete_updateController extends Controller
         ]);
     }
 
+// suggestion search
+    public function suggestions(Request $request)
+    {
+        $search = $request->input('query');
+        $suggestions = FilesTable::search($search . '*') // Change wildcard query
+            ->take(10)
+            ->get()
+            ->pluck('file_name');
 
-
-
+        return response()->json($suggestions);
+    }
+// update file method
     public function update(Request $request, $file_id)
     {
         // Find the file to be updated from the database
-        $file = files_table::findOrFail($file_id);
+        $file = FilesTable::findOrFail($file_id);
 
         // Validate the form data
         $validatedData = $request->validate([
@@ -135,3 +151,8 @@ class Search_delete_updateController extends Controller
         return redirect()->route('update', ['file_id' => $file_id])->with('success', 'تم تحديث الملف');
     }
 }
+
+
+
+
+
