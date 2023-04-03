@@ -68,6 +68,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/tables', [actions::class, 'index'])->name('tracking');
         Route::get('/admin/user', [actions::class, 'Show_users'])->name('workers');
                 Route::post('/make-admin/{user_id}', [actions::class,'makeAdmin']);
-
+                Route::post('/suspend/{user_id}', [actions::class, 'suspendUser']);
     });
 });

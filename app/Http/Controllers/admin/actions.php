@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\track_user;
 use App\Http\Controllers\Controller;
 use App\Models\user_table;
@@ -45,6 +47,26 @@ class actions extends Controller
             return back();
         } else {
             $user->admin = 'نعم';
+            $user->save();
+            return back();
+        }
+    }
+
+    public function suspendUser($user_id)
+    {
+        $user = User::find($user_id);
+        if ($user->is_suspended === 'مفعل') {
+            $user->is_suspended = 'تم ايقافه';
+            $user->save();
+
+            if (Auth::user()->user_id === $user->user_id) { // check if the suspended user is the same as the authenticated user
+                Auth::logout();
+                return redirect()->route('login')->with('message', 'تم إيقاف حسابك.');
+            } else {
+                return redirect()->back();
+            }
+        } else {
+            $user->is_suspended = 'مفعل';
             $user->save();
             return back();
         }

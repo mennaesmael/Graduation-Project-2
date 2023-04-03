@@ -171,7 +171,9 @@
                                                                 <th>الإيميل</th>
                                                                 <th>تم انشائه في</th>
                                                                 <th>أخر تسجيل دخول</th>
+                                                                <th>حساب المستخدم</th>
                                                                 <th>تعديل حالة المستخدم </th>
+                                                                <th>ايقاف المستخدم</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -183,14 +185,29 @@
                                                                     <td>{{ $user->email }}</td>
                                                                     <td>{{ $user->created_at }}</td>
                                                                     <td>{{ $user->last_login }}</td>
+                                                                    <td>{{ $user->is_suspended }}</td>
                                                                     <td>
-                                                                        <form method="POST" action="/make-admin/{{ $user->user_id }}" id="make-admin-form">
+                                                                        <form method="POST"
+                                                                            action="/make-admin/{{ $user->user_id }}"
+                                                                            id="make-admin-form">
                                                                             @csrf
-                                                                            <button type="submit" id="make-admin-button" class="btn {{ $user->admin === 'لا' ? 'btn-primary' : 'btn-secondary' }}" style="background-color: transparent; border: 2px solid #ccc; color: #ff0000; padding: 10px 20px; transition: all 0.3s ease;">
-                                                                              {{ $user->admin === 'لا' ? 'جعله ادمن' : 'عدم جعله ادمن' }}
+                                                                            <button type="submit"
+                                                                                id="make-admin-button"
+                                                                                class="btn {{ $user->admin === 'لا' ? 'btn-primary' : 'btn-secondary' }}"
+                                                                                style="background-color: transparent; border: 2px solid #ccc; color: #ff0000; padding: 10px 20px; transition: all 0.3s ease;">
+                                                                                {{ $user->admin === 'لا' ? 'جعله ادمن' : 'عدم جعله ادمن' }}
                                                                             </button>
-                                                                          </form>
-                                                                      </td>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form action="/suspend/{{ $user->user_id }}" method="POST" id="suspend-form">
+                                                                            @csrf
+                                                                            <button id="suspend-button" class="btn {{ $user->is_suspended === 'مفعل' ? 'btn-primary' : 'btn-secondary' }}" style="background-color: transparent; border: 2px solid #ccc; color: #ff0000; padding: 10px 20px; transition: all 0.3s ease;">
+                                                                                {{ $user->is_suspended === 'مفعل' ? 'ايقاف الحساب' : 'تفعيل الحساب' }}
+                                                                            </button>
+                                                                        </form>
+
+                                                                    </td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -202,21 +219,7 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
-                        @if (session('success'))
-                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                        <script>
-                            Swal.fire({
-                                title: "نجاح!",
-                                text: "{{ session('success') }}",
-                                icon: "success",
-                                confirmButtonText: "OK"
-                            });
-                        </script>
-                        @endif
             </x-app-layout>
         </div>
 
@@ -247,26 +250,49 @@
     <script src="../assets/js/plugins/bootstrap-notify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        const buttons = document.querySelectorAll('.btn');
+        const buttons = document.querySelectorAll('#make-admin-form');
         buttons.forEach(button => {
-          button.addEventListener('click', function(event) {
-            event.preventDefault();
-            Swal.fire({
-              title: 'هل "سيتم تحديث حالة المستخدم',
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'نعم، قم بالتحديث!',
-              cancelButtonText: 'الغاء'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.closest('form').submit();
-                }
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'سيتم تحديث حالة المستخدم',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'نعم، قم بالتحديث',
+                    cancelButtonText: 'الغاء'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit();
+                    }
+                });
             });
-          });
         });
-        </script>
+    </script>
+
+
+
+<script>
+    $('#suspend-button').click(function(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'سيتم تحديث حالة الحساب',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'نعم، قم بالتحديث',
+            cancelButtonText: 'الغاء'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit the form to suspend the account
+                $(this).closest('form').submit();
+            }
+        });
+    });
+</script>
+
 
 </body>
 

@@ -30,11 +30,15 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         // Update last_login timestamp for the authenticated user
-         /** @var User $user */
+        /** @var User $user */
         $user = Auth::user();
+        if ($user->is_suspended !== "مفعل") {
+            Auth::logout();
+            return redirect()->back()->withErrors(['email' => 'حسابك تم ايقافه']);
+        }
+
         $user->last_login = now('Africa/Cairo');
         $user->save();
-
         user_table::where('user_id', '<>', $user->user_id)->update(['last_login' => null]);
 
         $request->session()->regenerate();

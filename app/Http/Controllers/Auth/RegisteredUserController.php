@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'admin' => $request->admin,
             'password' => Hash::make($request->password),
+            'is_suspended' => "مفعل",
         ]);
 
         event(new Registered($user));
@@ -53,6 +54,6 @@ class RegisteredUserController extends Controller
         $track->New_User_Registerd = $request->name;
         $track->save();
 
-        return redirect(RouteServiceProvider::HOME);
+        return back();
     }
 }

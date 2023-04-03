@@ -9,10 +9,10 @@
 <body class="">
     @vite('resources/css/app.css')
 <div class=" max-w-sm  absolute inset-x-1/4 mr-44 mt-24 ">
-    
+
 <x-guest-layout class="bg-gray-200 ">
     <!-- Session Status -->
-    
+
     <x-auth-session-status class="mb-4 " :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}" >
@@ -24,7 +24,7 @@
             <span  class="text-2xl textcolor font-semibold  ">   تسجيل الدخول</span>
         </div>
         <div class="">
-            
+
             <x-input-label for="email" :value="__('البريد الالكتروني')" class=" m-4 textcolor"/>
             <x-text-input id="email" class="block mt-1 w-full bg-gray-100t  focus:border-gray-100"
              type="email" name="email" :value="old('email')" required
@@ -74,13 +74,18 @@
         </div>
 
     </form>
+    @if(session()->has('message'))
+    <script>
+        alert('{{ session('message') }}');
+    </script>
+@endif
 </x-guest-layout>
 </div>
-{{-- 
+{{--
 <footer  class="bg-neutral-100  text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left ">
     <div class="bg-neutral-200 p-6 text-center dark:bg-gray-900  ">
         <span>المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
-      
+
       </div>
 </footer> --}}
 </body>
