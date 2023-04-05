@@ -50,14 +50,40 @@ class Search_delete_updateController extends Controller
         }
         $isSearched = request()->input('searched') == '1';
 
+        // Define custom analyzer with ngram tokenizer
+        $analyzer = [
+            'type' => 'custom',
+            'tokenizer' => 'ngram_tokenizer',
+            'filter' => ['lowercase'],
+        ];
+
+        $ngramTokenizer = [
+            'type' => 'ngram',
+            'min_gram' => 1,
+            'max_gram' => 10,
+        ];
+
+        $settings = [
+            'analysis' => [
+                'analyzer' => [
+                    'ngram_analyzer' => $analyzer,
+                ],
+                'tokenizer' => [
+                    'ngram_tokenizer' => $ngramTokenizer,
+                ],
+            ],
+        ];
+
+        // Build Elasticsearch query
         $query = Query::bool()
             ->when(!empty($file_query) || !empty($user_query), function ($builder) use ($file_query, $user_query) {
                 if (!empty($file_query)) {
                     $builder->must(
                         Query::match()
                             ->field('file_name')
+                            ->analyzer('ngram_analyzer') // Use custom analyzer with ngram tokenizer
+                            ->minimumShouldMatch('80%')
                             ->query($file_query)
-                            ->fuzziness(2)
                             ->boost(3)
                     );
                 }
@@ -92,7 +118,6 @@ class Search_delete_updateController extends Controller
             $searchResult = [];
             $files = [];
         }
-
         return view('search', compact('files', 'file_query', 'user_query'));
     }
     //view update page
@@ -107,18 +132,18 @@ class Search_delete_updateController extends Controller
         ]);
     }
 
-// suggestion search
+    // suggestion search
     public function suggestions(Request $request)
     {
         $search = $request->input('query');
         $suggestions = FilesTable::search($search . '*') // Change wildcard query
-            ->take(10)
+            ->take(50)
             ->get()
             ->pluck('file_name');
 
         return response()->json($suggestions);
     }
-// update file method
+    // update file method
     public function update(Request $request, $file_id)
     {
         // Find the file to be updated from the database
@@ -151,8 +176,3 @@ class Search_delete_updateController extends Controller
         return redirect()->route('update', ['file_id' => $file_id])->with('success', 'تم تحديث الملف');
     }
 }
-
-
-
-
-

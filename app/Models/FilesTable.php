@@ -19,16 +19,10 @@ class FilesTable extends Model
     public function toSearchableArray()
     {
         return [
-            'file_id' => $this->file_id,
             'file_name' => $this->file_name,
             'user_name' => $this->user_name,
             'user_id' => $this->user_id,
-            'file_path' => $this->file_path,
-            'file_extension' => $this->file_extension,
-            'file_size' => $this->file_size,
-            'notes' =>$this->notes,
-            'updated_by' => $this->updated_by,
-            'updated_at' => $this->updated_at,
+
         ];
     }
 
@@ -37,17 +31,60 @@ class FilesTable extends Model
         return 'files';
     }
 
-    public function searchableRouting()
-    {
-        return $this->user_id;
-    }
-    public function searchableWith()
-    {
-        return [];
-    }
-    public static function model()
+//     public function searchableRouting()
+//     {
+//         return $this->user_id;
+//     }
+//     public function searchableWith()
+//     {
+//         return [];
+//     }
+//     public static function model()
+// {
+//     return new static();
+// }
+
+
+public function searchableOptions()
 {
-    return new static();
+    return [
+        'index' => 'files',
+        'type' => 'file',
+        'settings' => [
+            'analysis' => [
+ 'analyzer' => [
+     'ngram_analyzer' => [
+         'type' => 'custom',
+         'tokenizer' => 'ngram_tokenizer',
+         'filter' => ['lowercase']
+     ]
+ ],
+ 'tokenizer' => [
+     'ngram_tokenizer' => [
+         'type' => 'ngram',
+         'min_gram' => 1,
+         'max_gram' => 10
+     ]
+ ]
+            ]
+        ],
+        'mappings' => [
+            'file' => [
+ 'properties' => [
+     'file_name' => [
+         'type' => 'text',
+         'analyzer' => 'ngram_analyzer'
+     ],
+     'user_name' => [
+         'type' => 'text'
+     ],
+     'user_id' => [
+         'type' => 'integer'
+     ]
+ ]
+            ]
+        ]
+    ];
 }
 
 }
