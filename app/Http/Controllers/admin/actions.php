@@ -22,7 +22,7 @@ class actions extends Controller
 
         $actions = $query->paginate(30);
 
-        return view('admin.tables', compact('actions'));
+        return view('admin.tra', compact('actions'));
     }
 
     public function Show_users(Request $request)

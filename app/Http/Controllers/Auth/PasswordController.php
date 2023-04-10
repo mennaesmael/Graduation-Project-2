@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\track_user;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +26,10 @@ class PasswordController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
+        $track = new track_user();
+        $track->action = 'update password';
+        $track->user_id = $request->user()->user_id;
+        $track->save();
         return back()->with('status', 'password-updated');
     }
 }

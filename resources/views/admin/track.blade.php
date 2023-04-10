@@ -164,6 +164,9 @@
                                                     <th>Search Input</th>
                                                     <th>Updated By</th>
                                                     <th>Created At</th>
+                                                    <th> New_User_Registerd
+                                                    </th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -176,6 +179,8 @@
                                                         <td>{{ $action->search_input }}</td>
                                                         <td>{{ $action->updated_by }}</td>
                                                         <td>{{ $action->created_at }}</td>
+                                                        <td>{{ $action->New_User_Registerd }}</td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>

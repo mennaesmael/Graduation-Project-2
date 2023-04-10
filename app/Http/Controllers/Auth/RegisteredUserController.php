@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -31,12 +32,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $messages = [
+            'name.required' => 'الاسم مطلوب',
+            'name.string' => 'يجب أن يكون الاسم مكون من أحرف',
+            'name.max' => 'يجب أن لا يزيد الاسم عن 255 حرف',
+            'admin.required' => 'تسجيله كأدمن مطلوب',
+            'admin.string' => 'يجب أن تكون القيمة نصية',
+            'admin.in' => 'برجاء الاجابة بنعم او لا',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.string' => 'يجب أن يكون البريد الإلكتروني عبارة عن نص',
+            'email.email' => 'يجب إدخال بريد إلكتروني صالح',
+            'email.max' => 'يجب أن لا يزيد البريد الإلكتروني عن 255 حرف',
+            'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
+            'password.min' => 'يجب ان تكون كلمة المرور 8 احرف علي الاقل',
+            'password.confirmed' => 'كلمة المرور غير متطابقين',
+        ];
+
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'admin' => ['required', 'string', Rule::in(['نعم', 'لا'])],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.user_table::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . user_table::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        ], $messages);
+
+
 
         $user = user_table::create([
             'name' => $request->name,
@@ -50,10 +70,10 @@ class RegisteredUserController extends Controller
 
         $track = new track_user();
         $track->action = 'register';
-        $track->user_id =Auth::user()->user_id;
+        $track->user_id = Auth::user()->user_id;
         $track->New_User_Registerd = $request->name;
         $track->save();
 
-        return back();
+        return back()->with('success', 'تم تسحجيل الموظف ');;
     }
 }

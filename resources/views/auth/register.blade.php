@@ -185,7 +185,9 @@
                 <x-text-input id="password" class="block mt-1 w-full bg-gray-100"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password" />
+                                required autocomplete="new-password"
+                                placeholder="يجب الا يقل عن 8 احرف او ارقام"
+                                />
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
@@ -196,7 +198,10 @@
 
                 <x-text-input id="password_confirmation" class="block mt-1 w-full bg-gray-100"
                                 type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+                                name="password_confirmation" required autocomplete="new-password"
+                                placeholder="يجب الا يقل عن 8 احرف او ارقام"
+
+                                />
 
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
 
@@ -212,6 +217,17 @@
             </div>
 
         </form>
+        @if (session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: "Success!",
+                text: "{{ session('تم بنجاح') }}",
+                icon: "success",
+                confirmButtonText: "OK"
+            });
+        </script>
+    @endif
     </x-guest-layout>
 
 

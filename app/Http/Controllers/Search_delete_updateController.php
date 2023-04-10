@@ -82,7 +82,7 @@ class Search_delete_updateController extends Controller
                         Query::match()
                             ->field('file_name')
                             ->analyzer('ngram_analyzer') // Use custom analyzer with ngram tokenizer
-                            ->minimumShouldMatch('80%')
+                            ->minimumShouldMatch('70%')
                             ->query($file_query)
                             ->boost(3)
                     );
