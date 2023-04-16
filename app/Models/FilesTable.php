@@ -50,42 +50,23 @@ public function searchableOptions()
     return [
         'index' => 'files',
         'type' => 'file',
-        'settings' => [
-            'analysis' => [
- 'analyzer' => [
-     'ngram_analyzer' => [
-         'type' => 'custom',
-         'tokenizer' => 'ngram_tokenizer',
-         'filter' => ['lowercase']
-     ]
- ],
- 'tokenizer' => [
-     'ngram_tokenizer' => [
-         'type' => 'ngram',
-         'min_gram' => 1,
-         'max_gram' => 10
-     ]
- ]
-            ]
-        ],
         'mappings' => [
             'file' => [
- 'properties' => [
-     'file_name' => [
-         'type' => 'text',
-         'analyzer' => 'ngram_analyzer'
-     ],
-     'user_name' => [
-         'type' => 'text'
-     ],
-     'user_id' => [
-         'type' => 'integer'
-     ]
- ]
-            ]
-        ]
+                'properties' => [
+                    'file_name' => [
+                        'type' => 'text',
+                        'analyzer' => 'arabic',
+                    ],
+                    'user_name' => [
+                        'type' => 'text',
+                        'analyzer' => 'arabic',
+                    ],
+                ],
+            ],
+        ],
     ];
 }
+
 
 }
 

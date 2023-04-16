@@ -205,8 +205,8 @@
                                 <input
                                     class="w-full py-2 px-4 border border-gray-400 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                                     type="text" name="user_query"
-                                    placeholder="البحث باسم من رفع الملف او المعرف الخاص به.."
-                                    aria-label="Search by user name or ID">
+                                    placeholder="..البحث باسم من رفع الملف"
+                                    aria-label="Search by user name">
                                 <button
                                     class="bg-blue-700 hover:bg-blue-500 text-white font-bold
                         py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"

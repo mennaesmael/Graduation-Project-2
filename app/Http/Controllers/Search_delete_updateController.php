@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+
 use App\Models\track_user;
 use App\Models\FilesTable;
 use Illuminate\Http\Request;
@@ -50,30 +52,6 @@ class Search_delete_updateController extends Controller
         }
         $isSearched = request()->input('searched') == '1';
 
-        // Define custom analyzer with ngram tokenizer
-        $analyzer = [
-            'type' => 'custom',
-            'tokenizer' => 'ngram_tokenizer',
-            'filter' => ['lowercase'],
-        ];
-
-        $ngramTokenizer = [
-            'type' => 'ngram',
-            'min_gram' => 1,
-            'max_gram' => 10,
-        ];
-
-        $settings = [
-            'analysis' => [
-                'analyzer' => [
-                    'ngram_analyzer' => $analyzer,
-                ],
-                'tokenizer' => [
-                    'ngram_tokenizer' => $ngramTokenizer,
-                ],
-            ],
-        ];
-
         // Build Elasticsearch query
         $query = Query::bool()
             ->when(!empty($file_query) || !empty($user_query), function ($builder) use ($file_query, $user_query) {
@@ -81,8 +59,9 @@ class Search_delete_updateController extends Controller
                     $builder->must(
                         Query::match()
                             ->field('file_name')
-                            ->analyzer('ngram_analyzer') // Use custom analyzer with ngram tokenizer
-                            ->minimumShouldMatch('70%')
+                            ->analyzer('arabic')
+                            ->fuzziness(2)
+                            ->minimumShouldMatch('80%')
                             ->query($file_query)
                             ->boost(3)
                     );
@@ -92,16 +71,11 @@ class Search_delete_updateController extends Controller
                     $userSearch = Query::bool()->should(
                         Query::match()
                             ->field('user_name')
+                            ->analyzer('arabic')
                             ->query($user_query)
-                            ->fuzziness(0)
-                            ->boost(2)
+
                     );
 
-                    if (ctype_digit($user_query)) {
-                        $userSearch->should(
-                            Query::term()->field('user_id')->value($user_query)
-                        );
-                    }
 
                     $userSearch->minimumShouldMatch(1);
                     $builder->must($userSearch);
@@ -111,9 +85,14 @@ class Search_delete_updateController extends Controller
             });
 
         // Execute Elasticsearch query and get the models
+
+        $cacheKey = 'search:' . md5($file_query . $user_query);
+        $cacheTTL = 43200; // Cache for one day (24 hours)
         if ($isSearched) {
-            $searchResult = FilesTable::searchQuery($query)->execute();
-            $files = FilesTable::searchQuery($query)->paginate(40);
+            $files = Cache::remember($cacheKey, $cacheTTL, function () use ($query) {
+                $searchResult = FilesTable::searchQuery($query)->execute();
+                return FilesTable::searchQuery($query)->paginate(40);
+            });
         } else {
             $searchResult = [];
             $files = [];
