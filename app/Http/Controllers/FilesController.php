@@ -46,7 +46,8 @@ class FilesController extends Controller
         $track->user_id = $user->user_id;
         $track->file_id = $fileRecord->file_id;
         $track->save();
-        return redirect()->route('upload')->with('success', 'ملف ' . $fileName . 'تم بنجاح رفع');
+        $fileRecord->save();
+        return redirect()->route('upload')->with('success', 'تم بنجاح رفع' . " ملف " . $fileName);
     }
 
     public function getFilesByMonth()
