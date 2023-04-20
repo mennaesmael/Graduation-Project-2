@@ -71,7 +71,7 @@ class RegisteredUserController extends Controller
         $track = new track_user();
         $track->action = 'register';
         $track->user_id = Auth::user()->user_id;
-        $track->New_User_Registerd = $request->name;
+        $track->New_User_Registerd = $user->id;
         $track->save();
 
         return back()->with('success', 'تم تسحجيل الموظف ');;

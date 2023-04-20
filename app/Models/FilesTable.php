@@ -49,22 +49,53 @@ public function searchableOptions()
 {
     return [
         'index' => 'files',
-        'type' => 'file',
-        'mappings' => [
-            'file' => [
+        'body' => [
+            'settings' => [
+                'analysis' => [
+                    'analyzer' => [
+                        'custom_arabic_analyzer' => [
+                            'type' => 'custom',
+                            'tokenizer' => 'standard',
+                            'filter' => [
+                                'lowercase',
+                                'arabic_normalization',
+                                'arabic_stop',
+                                'arabic_keywords',
+                                'arabic_stemmer',
+                            ],
+                        ],
+                    ],
+                    'filter' => [
+                        'arabic_stop' => [
+                            'type' => 'stop',
+                            'stopwords' => '_arabic_',
+                        ],
+                        'arabic_keywords' => [
+                            'type' => 'keyword_marker',
+                            'keywords' => ['ال'],
+                        ],
+                        'arabic_stemmer' => [
+                            'type' => 'stemmer',
+                            'language' => 'arabic',
+                        ],
+                    ],
+                ],
+            ],
+            'mappings' => [
                 'properties' => [
                     'file_name' => [
                         'type' => 'text',
-                        'analyzer' => 'arabic',
+                        'analyzer' => 'custom_arabic_analyzer',
                     ],
                     'user_name' => [
                         'type' => 'text',
-                        'analyzer' => 'arabic',
+                        'analyzer' => 'custom_arabic_analyzer',
                     ],
                 ],
             ],
         ],
     ];
+
 }
 
 

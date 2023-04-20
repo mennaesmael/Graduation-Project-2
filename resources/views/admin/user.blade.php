@@ -200,9 +200,12 @@
                                                                         </form>
                                                                     </td>
                                                                     <td>
-                                                                        <form action="/suspend/{{ $user->user_id }}" method="POST" id="suspend-form">
+                                                                        <form action="/suspend/{{ $user->user_id }}"
+                                                                            method="POST" id="suspend-form">
                                                                             @csrf
-                                                                            <button class="suspend-button btn{{ $user->is_suspended === 'مفعل' ? 'btn-primary' : 'btn-secondary' }}" style="background-color: transparent; border: 2px solid #ccc; color: #ff0000; padding: 10px 20px; transition: all 0.3s ease;">
+                                                                            <button
+                                                                                class="suspend-button btn{{ $user->is_suspended === 'مفعل' ? 'btn-primary' : 'btn-secondary' }}"
+                                                                                style="background-color: transparent; border: 2px solid #ccc; color: #ff0000; padding: 10px 20px; transition: all 0.3s ease;">
                                                                                 {{ $user->is_suspended === 'مفعل' ? 'ايقاف الحساب' : 'تفعيل الحساب' }}
                                                                             </button>
                                                                         </form>
@@ -265,32 +268,43 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         this.closest('form').submit();
+                        Swal.fire({
+                            title: 'تم التحديث بنجاح',
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'حسناً'
+                        });
                     }
                 });
             });
         });
     </script>
 
-
-<script>
-$('.suspend-button').click(function(event) {
-    event.preventDefault();
-    Swal.fire({
-        title: 'سيتم تحديث حالة الحساب',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'نعم، قم بالتحديث',
-        cancelButtonText: 'الغاء'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Submit the form to suspend the account
-            $(this).closest('form').submit();
-        }
-    });
-});
-</script>
+    <script>
+        $('.suspend-button').click(function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'سيتم تحديث حالة الحساب',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'نعم، قم بالتحديث',
+                cancelButtonText: 'الغاء'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form to suspend the account
+                    $(this).closest('form').submit();
+                    Swal.fire({
+                        title: 'تم التحديث بنجاح',
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'حسناً'
+                    });
+                }
+            });
+        });
+    </script>
 
 
 </body>

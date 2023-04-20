@@ -14,149 +14,269 @@ use Elastic\ScoutDriverPlus\Support\Query;
 class Search_delete_updateController extends Controller
 {
     // search method
+    // public function search(Request $request)
+    // {
+    //     // $file_query = $request->input('query');
+    //     // $user_query = $request->input('user_query');
+    //     // if (!empty($file_query) && empty($user_query)) {
+    //     //     // Record the search in the track_user table
+    //     //     $track = new track_user();
+    //     //     $track->action = 'search';
+    //     //     $track->user_id = Auth::user()->user_id;
+    //     //     $track->search_input = $file_query;
+    //     //     $track->save();
+    //     // } elseif (empty($file_query) && !empty($user_query)) {
+    //     //     $track = new track_user();
+    //     //     $track->action = 'search';
+    //     //     $track->user_id = Auth::user()->user_id;
+    //     //     $track->search_input = $user_query;
+    //     //     $track->save();
+    //     // } elseif (empty($user_query) && empty($file_query) && $request->has('searched')) {
+    //     //     $track = new track_user();
+    //     //     $track->action = 'search';
+    //     //     $track->user_id = Auth::user()->user_id;
+    //     //     $track->search_input = "press search";
+    //     //     $track->save();
+    //     // } elseif (!empty($user_query) && !empty($file_query)) {
+    //     //     $track = new track_user();
+    //     //     $track->action = 'search';
+    //     //     $track->user_id = Auth::user()->user_id;
+    //     //     $track->search_input = $file_query;
+    //     //     $track->save();
+
+    //     //     $track = new track_user();
+    //     //     $track->action = 'search';
+    //     //     $track->user_id = Auth::user()->user_id;
+    //     //     $track->search_input = $user_query;
+    //     //     $track->save();
+    //     // }
+    //     // $isSearched = request()->input('searched') == '1';
+
+    //     // // Build Elasticsearch query
+    //     // $query = Query::bool()
+    //     //     ->when(!empty($file_query) || !empty($user_query), function ($builder) use ($file_query, $user_query) {
+    //     //         if (!empty($file_query)) {
+    //     //             $builder->must(
+    //     //                 Query::match()
+    //     //                     ->field('file_name')
+    //     //                     ->analyzer('arabic')
+    //     //                     ->fuzziness(2)
+    //     //                     ->minimumShouldMatch('80%')
+    //     //                     ->query($file_query)
+    //     //                     ->boost(3)
+    //     //             );
+    //     //         }
+
+    //     //         if (!empty($user_query)) {
+    //     //             $userSearch = Query::bool()->should(
+    //     //                 Query::match()
+    //     //                     ->field('user_name')
+    //     //                     ->analyzer('arabic')
+    //     //                     ->query($user_query)
+
+    //     //             );
+
+
+    //     //             $userSearch->minimumShouldMatch(1);
+    //     //             $builder->must($userSearch);
+    //     //         }
+    //     //     }, function ($builder) {
+    //     //         return $builder->must(Query::matchAll());
+    //     //     });
+
+    //     // // Execute Elasticsearch query and get the models
+
+    //     // $cacheKey = 'search:' . md5($file_query . $user_query);
+    //     // $cacheTTL = 21600; // Cache for one day (6 hours)
+    //     // if ($isSearched) {
+    //     //     $files = Cache::remember($cacheKey, $cacheTTL, function () use ($query) {
+    //     //         $searchResult = FilesTable::searchQuery($query)->execute();
+    //     //         return FilesTable::searchQuery($query)->paginate(40);
+    //     //     });
+    //     // } else {
+    //     //     $searchResult = [];
+    //     //     $files = [];
+    //     // }
+    //     // return view('search', compact('files', 'file_query', 'user_query'));
+    //     $file_query = $request->input('query');
+    //     $user_query = $request->input('user_query');
+
+    //     // Record the search in the track_user table
+    //     if (!empty($file_query) || !empty($user_query)) {
+    //         $track = new track_user();
+    //         $track->action = 'search';
+    //         $track->user_id = Auth::user()->user_id;
+
+    //         if (!empty($file_query)) {
+    //             $track->search_input = $file_query;
+    //             $track->save();
+    //         }
+
+    //         if (!empty($user_query)) {
+    //             $track->search_input = $user_query;
+    //             $track->save();
+    //         }
+
+    //         if (!empty($file_query) && !empty($user_query)) {
+    //             $track->action = 'search';
+    //             $track->user_id = Auth::user()->user_id;
+    //             $track->search_input = $file_query;
+    //             $track->save();
+
+    //             $track = new track_user();
+    //             $track->action = 'search';
+    //             $track->user_id = Auth::user()->user_id;
+    //             $track->search_input = $user_query;
+    //             $track->save();
+    //         }
+    //     }
+
+    //     $isSearched = request()->input('searched') == '1';
+
+    //     // Build Elasticsearch query
+    //     $query = Query::bool()
+    //         ->when(!empty($file_query) || !empty($user_query), function ($builder) use ($file_query, $user_query) {
+    //             if (!empty($file_query)) {
+    //                 $builder->must(
+    //                     Query::match()
+    //                         ->field('file_name')
+    //                         ->analyzer('arabic')
+    //                         ->fuzziness(2)
+    //                         ->minimumShouldMatch('80%')
+    //                         ->query($file_query)
+    //                         ->boost(3)
+    //                 );
+    //             }
+    //             if (!empty($user_query)) {
+    //                 $userSearch = Query::bool()->should(
+    //                     Query::match()
+    //                         ->field('user_name')
+    //                         ->analyzer('arabic')
+    //                         ->query($user_query)
+    //                 );
+    //                 $userSearch->minimumShouldMatch(1);
+    //                 $builder->must($userSearch);
+    //             }
+    //         }, function ($builder) {
+    //             return $builder->must(Query::matchAll());
+    //         });
+
+    //     // Execute Elasticsearch query and get the models
+    //     $cacheKey = 'search:' . md5($file_query . '|' . $user_query . '|' . request()->input('page', 1));
+    //     $cacheTags = ['search_results']; // Add a cache tag for search results
+    //     $cacheTTL = 600; // Cache for 10 minutes
+
+    //     if ($isSearched) {
+    //         $files = Cache::tags($cacheTags)->remember($cacheKey, $cacheTTL, function () use ($query) {
+    //             $searchResult = FilesTable::searchQuery($query)->execute();
+    //             return FilesTable::searchQuery($query)->paginate(40);
+    //         });
+    //     } else {
+    //         $searchResult = [];
+    //         $files = [];
+    //     }
+
+    //     return view('search', compact('files', 'file_query', 'user_query'));
+    // }
     public function search(Request $request)
     {
-        // $file_query = $request->input('query');
-        // $user_query = $request->input('user_query');
-        // if (!empty($file_query) && empty($user_query)) {
-        //     // Record the search in the track_user table
-        //     $track = new track_user();
-        //     $track->action = 'search';
-        //     $track->user_id = Auth::user()->user_id;
-        //     $track->search_input = $file_query;
-        //     $track->save();
-        // } elseif (empty($file_query) && !empty($user_query)) {
-        //     $track = new track_user();
-        //     $track->action = 'search';
-        //     $track->user_id = Auth::user()->user_id;
-        //     $track->search_input = $user_query;
-        //     $track->save();
-        // } elseif (empty($user_query) && empty($file_query) && $request->has('searched')) {
-        //     $track = new track_user();
-        //     $track->action = 'search';
-        //     $track->user_id = Auth::user()->user_id;
-        //     $track->search_input = "press search";
-        //     $track->save();
-        // } elseif (!empty($user_query) && !empty($file_query)) {
-        //     $track = new track_user();
-        //     $track->action = 'search';
-        //     $track->user_id = Auth::user()->user_id;
-        //     $track->search_input = $file_query;
-        //     $track->save();
-
-        //     $track = new track_user();
-        //     $track->action = 'search';
-        //     $track->user_id = Auth::user()->user_id;
-        //     $track->search_input = $user_query;
-        //     $track->save();
-        // }
-        // $isSearched = request()->input('searched') == '1';
-
-        // // Build Elasticsearch query
-        // $query = Query::bool()
-        //     ->when(!empty($file_query) || !empty($user_query), function ($builder) use ($file_query, $user_query) {
-        //         if (!empty($file_query)) {
-        //             $builder->must(
-        //                 Query::match()
-        //                     ->field('file_name')
-        //                     ->analyzer('arabic')
-        //                     ->fuzziness(2)
-        //                     ->minimumShouldMatch('80%')
-        //                     ->query($file_query)
-        //                     ->boost(3)
-        //             );
-        //         }
-
-        //         if (!empty($user_query)) {
-        //             $userSearch = Query::bool()->should(
-        //                 Query::match()
-        //                     ->field('user_name')
-        //                     ->analyzer('arabic')
-        //                     ->query($user_query)
-
-        //             );
-
-
-        //             $userSearch->minimumShouldMatch(1);
-        //             $builder->must($userSearch);
-        //         }
-        //     }, function ($builder) {
-        //         return $builder->must(Query::matchAll());
-        //     });
-
-        // // Execute Elasticsearch query and get the models
-
-        // $cacheKey = 'search:' . md5($file_query . $user_query);
-        // $cacheTTL = 21600; // Cache for one day (6 hours)
-        // if ($isSearched) {
-        //     $files = Cache::remember($cacheKey, $cacheTTL, function () use ($query) {
-        //         $searchResult = FilesTable::searchQuery($query)->execute();
-        //         return FilesTable::searchQuery($query)->paginate(40);
-        //     });
-        // } else {
-        //     $searchResult = [];
-        //     $files = [];
-        // }
-        // return view('search', compact('files', 'file_query', 'user_query'));
+        $isSearched = $request->input('searched') == '1';
         $file_query = $request->input('query');
         $user_query = $request->input('user_query');
-
-        // Record the search in the track_user table
+        // track search
         if (!empty($file_query) || !empty($user_query)) {
             $track = new track_user();
             $track->action = 'search';
             $track->user_id = Auth::user()->user_id;
-            $track->search_input = json_encode(compact('file_query', 'user_query'));
-            $track->save();
+
+            if (!empty($file_query)) {
+                $track->search_input = $file_query;
+                $track->save();
+            }
+
+            if (!empty($user_query)) {
+                $track->search_input = $user_query;
+                $track->save();
+            }
+
+            if (!empty($file_query) && !empty($user_query)) {
+                $track->action = 'search';
+                $track->user_id = Auth::user()->user_id;
+                $track->search_input = $file_query;
+                $track->save();
+
+                $track = new track_user();
+                $track->action = 'search';
+                $track->user_id = Auth::user()->user_id;
+                $track->search_input = $user_query;
+                $track->save();
+            }
+        }
+        // Check if both inputs are empty
+        if ($isSearched && empty($file_query) && empty($user_query)) {
+            return redirect()->route('search')->with('error', 'من فضلك قم بكتابة شيء للبحث عنه');
         }
 
-        $isSearched = request()->input('searched') == '1';
 
         // Build Elasticsearch query
-        $query = Query::bool()
+        $query = $this->buildElasticsearchQuery($file_query, $user_query);
+
+        // Get cache key and cache tags
+        $cacheKey = $this->getCacheKey($file_query, $user_query, $request->input('page', 1));
+        $cacheTags = ['search_results'];
+
+        // Cache for 10 minutes
+        $cacheTTL = 600;
+
+        if ($isSearched) {
+            $files = Cache::tags($cacheTags)->remember($cacheKey, $cacheTTL, function () use ($query) {
+                return FilesTable::searchQuery($query)->paginate(40);
+            });
+        } else {
+            $files = [];
+        }
+
+        return view('search', compact('files', 'file_query', 'user_query'));
+    }
+
+    private function buildElasticsearchQuery($file_query, $user_query)
+    {
+        return Query::bool()
             ->when(!empty($file_query) || !empty($user_query), function ($builder) use ($file_query, $user_query) {
                 if (!empty($file_query)) {
                     $builder->must(
                         Query::match()
                             ->field('file_name')
-                            ->analyzer('arabic')
+                            ->analyzer('custom_arabic_analyzer')
                             ->fuzziness(2)
+                            ->prefixLength(2) // Add prefix length
                             ->minimumShouldMatch('80%')
                             ->query($file_query)
                             ->boost(3)
                     );
                 }
+
                 if (!empty($user_query)) {
                     $userSearch = Query::bool()->should(
                         Query::match()
                             ->field('user_name')
-                            ->analyzer('arabic')
+                            ->analyzer('custom_arabic_analyzer')
                             ->query($user_query)
                     );
+
                     $userSearch->minimumShouldMatch(1);
                     $builder->must($userSearch);
                 }
             }, function ($builder) {
                 return $builder->must(Query::matchAll());
             });
-
-        // Execute Elasticsearch query and get the models
-        $cacheKey = 'search:' . md5($file_query . '|' . $user_query);
-        $cacheTags = ['search_results']; // Add a cache tag for search results
-        $cacheTTL = 600; // Cache for 10 minutes
-
-        if ($isSearched) {
-            $files = Cache::tags($cacheTags)->remember($cacheKey, $cacheTTL, function () use ($query) {
-                $searchResult = FilesTable::searchQuery($query)->execute();
-                return FilesTable::searchQuery($query)->paginate(40);
-            });
-        } else {
-            $searchResult = [];
-            $files = [];
-        }
-
-        return view('search', compact('files', 'file_query', 'user_query'));
     }
+
+    private function getCacheKey($file_query, $user_query, $page)
+    {
+        return 'search:' . md5($file_query . '|' . $user_query . '|' . $page);
+    }
+
     //view update page
     public function showUpdateForm($id)
     {
