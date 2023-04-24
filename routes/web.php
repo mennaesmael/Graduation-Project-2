@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FilesController;
-use App\Http\Controllers\Search_delete_updateController;
+use App\Http\Controllers\Search_suggest_updateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,21 +27,22 @@ Route::get('/dashboard', function () {
 Route::get('/upload', function () {
     return view('upload');
 })->middleware(['auth', 'verified'])->name('upload');
+Route::post('/upload', [FilesController::class, 'store'])->middleware(['auth', 'verified'])->name('upload');
 
-Route::get('/search', [Search_delete_updateController::class, 'search'])->middleware(['auth', 'verified'])->name('search');
+Route::get('/search', [Search_suggest_updateController::class, 'search'])->middleware(['auth', 'verified'])->name('search');
 // Route::get('/files/{id}/update', [SearchController::class, 'showUpdateForm'])->name('update');
-Route::get('/update/{file_id}', [Search_delete_updateController::class, 'showUpdateForm'])->middleware(['auth', 'verified'])->name('update');
-Route::post('/update/{file_id}', [Search_delete_updateController::class, 'update'])->middleware(['auth', 'verified'])->name('update');
-Route::get('/suggestions', [Search_delete_updateController::class, 'suggestions'])->middleware(['auth', 'verified'])->name('suggestions');
+Route::get('/update/{file_id}', [Search_suggest_updateController::class, 'showUpdateForm'])->middleware(['auth', 'verified'])->name('update');
+Route::post('/update/{file_id}', [Search_suggest_updateController::class, 'update'])->middleware(['auth', 'verified'])->name('update');
+Route::get('/suggestions', [Search_suggest_updateController::class, 'suggestions'])->middleware(['auth', 'verified'])->name('suggestions');
 // Route to delete a file
-Route::delete('/files/{file}/delete', [Search_delete_updateController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete');
+// Route::delete('/files/{file}/delete', [Search_suggest_updateController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete');
 
 // Route to update the file
 // Route::post('/files/{file}', [FilesController::class, 'update'])->name('files.update');
 
 
 
-Route::post('/upload', [FilesController::class, 'store'])->middleware(['auth', 'verified'])->name('upload');
+// Route::post('/upload', [FilesController::class, 'store'])->middleware(['auth', 'verified'])->name('upload');
 
 
 

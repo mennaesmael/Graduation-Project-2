@@ -364,7 +364,7 @@
                                                             class="px-3 py-3 border-b border-gray-200 bg-white text-sm">
                                                             @if ($file->model()->file_id)
                                                                 <form
-                                                                    action="{{ route('delete', $file->model()->file_id) }}"
+                                                                    {{-- action="{{ route('delete', $file->model()->file_id) }}" --}}
                                                                     method="POST">
                                                                     @csrf
                                                                     @method('DELETE')

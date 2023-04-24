@@ -16,13 +16,12 @@ class FilesTable extends Model
     protected $table = 'files';
     protected $primaryKey = 'file_id';
     public $timestamps = false;
+    // elasticsearch part
     public function toSearchableArray()
     {
         return [
             'file_name' => $this->file_name,
             'user_name' => $this->user_name,
-            'user_id' => $this->user_id,
-
         ];
     }
 

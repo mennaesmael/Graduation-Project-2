@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 
 class admin_dashboard extends Controller
 {
-
+//information of user in dashboard
     public function get_information()
     {
         $filesByMonth = FilesTable::selectRaw('COUNT(*) as count, YEAR(created_at) as year, MONTH(created_at) as month')

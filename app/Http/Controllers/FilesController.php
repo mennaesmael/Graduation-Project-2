@@ -10,7 +10,7 @@ use App\Models\track_user;
 
 class FilesController extends Controller
 {
-
+//store files
 
     public function store(Request $request)
     {
@@ -49,7 +49,7 @@ class FilesController extends Controller
         $fileRecord->save();
         return redirect()->route('upload')->with('success', 'تم بنجاح رفع' . " ملف " . $fileName);
     }
-
+//get files by month
     public function getFilesByMonth()
     {
         $filesByMonth = FilesTable::selectRaw('COUNT(*) as count, YEAR(created_at) as year, MONTH(created_at) as month')

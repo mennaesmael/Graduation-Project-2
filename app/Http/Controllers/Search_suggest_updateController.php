@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Elastic\ScoutDriverPlus\Support\Query;
 
 
-class Search_delete_updateController extends Controller
+class Search_suggest_updateController extends Controller
 {
     // search method
     // public function search(Request $request)
@@ -178,6 +178,8 @@ class Search_delete_updateController extends Controller
 
     //     return view('search', compact('files', 'file_query', 'user_query'));
     // }
+
+    // search method
     public function search(Request $request)
     {
         $isSearched = $request->input('searched') == '1';
@@ -238,7 +240,7 @@ class Search_delete_updateController extends Controller
 
         return view('search', compact('files', 'file_query', 'user_query'));
     }
-
+    // elasticsearch query
     private function buildElasticsearchQuery($file_query, $user_query)
     {
         return Query::bool()
@@ -271,7 +273,7 @@ class Search_delete_updateController extends Controller
                 return $builder->must(Query::matchAll());
             });
     }
-
+    //cache
     private function getCacheKey($file_query, $user_query, $page)
     {
         return 'search:' . md5($file_query . '|' . $user_query . '|' . $page);
@@ -293,7 +295,7 @@ class Search_delete_updateController extends Controller
     public function suggestions(Request $request)
     {
         $search = $request->input('query');
-        $suggestions = FilesTable::search($search . '*') // Change wildcard query
+        $suggestions = FilesTable::search('*' . $search . '*') 
             ->take(50)
             ->get()
             ->pluck('file_name');
@@ -325,7 +327,6 @@ class Search_delete_updateController extends Controller
         Cache::tags(['search_results'])->flush();
 
 
-        // Redirect back to the file listing page
         $track = new track_user();
         $track->file_id = $file->file_id;
         $track->updated_by = $validatedData['updated_by'];
@@ -335,7 +336,7 @@ class Search_delete_updateController extends Controller
 
 
 
-        // Redirect back to the file listing page
+        // Redirect back to update page
         return redirect()->route('update', ['file_id' => $file_id])->with('success', 'تم تحديث الملف');
     }
 }

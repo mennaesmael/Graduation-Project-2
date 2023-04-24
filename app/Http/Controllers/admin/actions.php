@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class actions extends Controller
 {
+    //track users
     public function index(Request $request)
     {
         $query = track_user::query();
@@ -24,7 +25,7 @@ class actions extends Controller
 
         return view('admin.track', compact('actions'));
     }
-
+//show users
     public function Show_users(Request $request)
     {
         $query = user_table::query();
@@ -37,6 +38,7 @@ class actions extends Controller
 
         return view('admin.user', compact('users'));
     }
+    //make admin
     public function makeAdmin($user_id)
     {
         $user = User::find($user_id);
@@ -51,7 +53,7 @@ class actions extends Controller
             return back();
         }
     }
-
+//suspend user
     public function suspendUser($user_id)
     {
         $user = User::find($user_id);
