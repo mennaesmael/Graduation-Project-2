@@ -35,13 +35,13 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('verify-email', EmailVerificationPromptController::class)
-        ->name('verification.notice');
+    // Route::get('verify-email', EmailVerificationPromptController::class)
+    //     ->name('verification.notice');
 
 
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
+    // Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+    //     ->middleware(['signed', 'throttle:6,1'])
+    //     ->name('verification.verify');
 
     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
         ->middleware('throttle:6,1')
@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
 
         Route::post('register', [RegisteredUserController::class, 'store']);
 
-        Route::get('/admin/track', [actions::class, 'index'])->name('tracking');
+        Route::get('/admin/track', [actions::class, 'track'])->name('tracking');
         Route::get('/admin/user', [actions::class, 'Show_users'])->name('workers');
                 Route::post('/make-admin/{user_id}', [actions::class,'makeAdmin']);
                 Route::post('/suspend/{user_id}', [actions::class, 'suspendUser']);

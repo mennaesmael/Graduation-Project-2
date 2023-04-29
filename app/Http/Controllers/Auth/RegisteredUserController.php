@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\user_table;
 use App\Models\track_user;
-use App\Providers\RouteServiceProvider;
+// use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,14 +35,12 @@ class RegisteredUserController extends Controller
         $messages = [
             'name.required' => 'الاسم مطلوب',
             'name.string' => 'يجب أن يكون الاسم مكون من أحرف',
-            'name.max' => 'يجب أن لا يزيد الاسم عن 255 حرف',
             'admin.required' => 'تسجيله كأدمن مطلوب',
             'admin.string' => 'يجب أن تكون القيمة نصية',
             'admin.in' => 'برجاء الاجابة بنعم او لا',
             'email.required' => 'البريد الإلكتروني مطلوب',
             'email.string' => 'يجب أن يكون البريد الإلكتروني عبارة عن نص',
             'email.email' => 'يجب إدخال بريد إلكتروني صالح',
-            'email.max' => 'يجب أن لا يزيد البريد الإلكتروني عن 255 حرف',
             'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
             'password.min' => 'يجب ان تكون كلمة المرور 8 احرف علي الاقل',
             'password.confirmed' => 'كلمة المرور غير متطابقين',
@@ -50,9 +48,9 @@ class RegisteredUserController extends Controller
 
 
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string'],
             'admin' => ['required', 'string', Rule::in(['نعم', 'لا'])],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . user_table::class],
+            'email' => ['required', 'string', 'email', 'unique:' . user_table::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $messages);
 
@@ -67,7 +65,7 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
+        // track registration
         $track = new track_user();
         $track->action = 'register';
         $track->user_id = Auth::user()->user_id;

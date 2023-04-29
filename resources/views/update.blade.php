@@ -55,47 +55,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <label for="updated_at"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('تاريخ التحديث') }}</label>
-
-                                <div class="col-md-6">
-                                    <?php setlocale(LC_ALL, 'ar'); ?>
-                                    <input id="updated_at" type="datetime-local"
-                                        class="form-control @error('updated_at') is-invalid @enderror" name="updated_at"
-                                        value="{{ strftime('%Y-%m-%dT%H:%M:%S', strtotime($file->updated_at)) }}"
-                                        required min="2023-01-01T00:00"
-                                        placeholder="{{ strftime('%Y-%m-%dT%H:%M:%S', strtotime($file->updated_at)) }}"
-                                        dir="rtl">
-
-
-
-
-                                    @error('updated_at')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="updated_by"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('تم تحديثه بواسطة') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="updated_by" type="text"
-                                        class="form-control @error('updated_by') is-invalid @enderror" name="updated_by"
-                                        value="{{ $file->updated_by }}" required>
-
-                                    @error('updated_by')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="form-group row mb-0 text-center">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">

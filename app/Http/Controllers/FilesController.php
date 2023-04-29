@@ -10,7 +10,7 @@ use App\Models\track_user;
 
 class FilesController extends Controller
 {
-//store files
+    //store files
 
     public function store(Request $request)
     {
@@ -30,17 +30,17 @@ class FilesController extends Controller
         $fileRecord = new FilesTable;
         $fileRecord->file_name = $request->name;
         $user = Auth::user();
-        if ($user) {
-            $fileRecord->user_id = $user->user_id;
-            $fileRecord->user_name = $user->name;
-        }
+
+        $fileRecord->user_id = $user->user_id;
+        $fileRecord->user_name = $user->name;
+
         $fileRecord->file_path = $path;
         $fileRecord->file_size = $file->getSize();
         $fileRecord->file_extension = $file->getClientOriginalExtension();
         $fileRecord->notes = $request->notes ?? 'no notes';
         $fileRecord->updated_by = 'not yet updated';
         $fileRecord->save();
-
+// track files
         $track = new track_user();
         $track->action = 'upload';
         $track->user_id = $user->user_id;
@@ -49,14 +49,14 @@ class FilesController extends Controller
         $fileRecord->save();
         return redirect()->route('upload')->with('success', 'تم بنجاح رفع' . " ملف " . $fileName);
     }
-//get files by month
-    public function getFilesByMonth()
-    {
-        $filesByMonth = FilesTable::selectRaw('COUNT(*) as count, YEAR(created_at) as year, MONTH(created_at) as month')
-            ->groupBy('year', 'month')
-            ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
-            ->get();
-        return $filesByMonth;
-    }
+    // //get files by month
+    // public function getFilesByMonth()
+    // {
+    //     $filesByMonth = FilesTable::selectRaw('COUNT(*) as count, YEAR(created_at) as year, MONTH(created_at) as month')
+    //         ->groupBy('year', 'month')
+    //         ->orderBy('year', 'desc')
+    //         ->orderBy('month', 'desc')
+    //         ->get();
+    //     return $filesByMonth;
+    // }
 }

@@ -295,7 +295,7 @@ class Search_suggest_updateController extends Controller
     public function suggestions(Request $request)
     {
         $search = $request->input('query');
-        $suggestions = FilesTable::search('*' . $search . '*') 
+        $suggestions = FilesTable::search('*' . $search . '*')
             ->take(50)
             ->get()
             ->pluck('file_name');
@@ -312,24 +312,22 @@ class Search_suggest_updateController extends Controller
         $validatedData = $request->validate([
             'file_name' => 'required',
             'notes' => 'required',
-            'updated_at' => 'required',
-            'updated_by' => 'required',
         ]);
 
         // Update the file name and notes in the database
         $file->file_name = $validatedData['file_name'];
         $file->notes = $validatedData['notes'];
-        $file->updated_at = $validatedData['updated_at'];
-        $file->updated_by = $validatedData['updated_by'];
+        $file->updated_at = now('Africa/Cairo');
+        $file->updated_by = auth()->user()->name;
         $file->save();
 
-        // Clear the cache for search results
+        // Clear the cache for search results after updating the file
         Cache::tags(['search_results'])->flush();
 
 
         $track = new track_user();
         $track->file_id = $file->file_id;
-        $track->updated_by = $validatedData['updated_by'];
+        $track->updated_by = auth()->user()->name;
         $track->action = 'update';
         $track->user_id = Auth::user()->user_id;
         $track->save();

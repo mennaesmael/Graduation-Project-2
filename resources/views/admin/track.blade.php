@@ -157,14 +157,14 @@
                                         <table class="table">
                                             <thead class="text-primary">
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>User ID</th>
-                                                    <th>File ID</th>
-                                                    <th>Action</th>
-                                                    <th>Search Input</th>
-                                                    <th>Updated By</th>
-                                                    <th>Created At</th>
-                                                    <th> New_User_Registerd
+                                                    <th>المعرف</th>
+                                                    <th>معرف المستخدم</th>
+                                                    <th> معرف الملف</th>
+                                                    <th>النشاط</th>
+                                                    <th>جمل بحث المستحدم</th>
+                                                    <th>تم تحديثه بواسطة</th>
+                                                    <th>وقت حدوث النشاط</th>
+                                                    <th>تسجيل مستخدم جديد
                                                     </th>
 
                                                 </tr>

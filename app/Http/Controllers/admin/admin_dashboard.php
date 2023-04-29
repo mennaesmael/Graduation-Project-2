@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\FilesTable;
-use App\Models\user_table;
+// use App\Models\user_table;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon;
+// use App\Models\User;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Carbon;
 
 
 class admin_dashboard extends Controller
@@ -31,9 +31,9 @@ class admin_dashboard extends Controller
             ->orderBy('month', 'desc')
             ->get();
 
-        $month = request('month');
-        $loggedInUsers = user_table::whereNotNull('last_login')->get();
+        // $month = request('month');
+        // $loggedInUsers = user_table::whereNotNull('last_login')->get();
 
-        return view('dashboard', compact('filesByMonth', 'userFilesByMonth', 'month', 'loggedInUsers'));
+        return view('dashboard', compact('filesByMonth', 'userFilesByMonth'));
     }
 }

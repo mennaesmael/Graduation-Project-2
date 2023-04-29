@@ -22,27 +22,27 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::get('/upload', function () {
     return view('upload');
-})->middleware(['auth', 'verified'])->name('upload');
-Route::post('/upload', [FilesController::class, 'store'])->middleware(['auth', 'verified'])->name('upload');
+})->middleware('auth')->name('upload');
+Route::post('/upload', [FilesController::class, 'store'])->middleware('auth')->name('upload');
 
-Route::get('/search', [Search_suggest_updateController::class, 'search'])->middleware(['auth', 'verified'])->name('search');
+Route::get('/search', [Search_suggest_updateController::class, 'search'])->middleware('auth')->name('search');
 // Route::get('/files/{id}/update', [SearchController::class, 'showUpdateForm'])->name('update');
-Route::get('/update/{file_id}', [Search_suggest_updateController::class, 'showUpdateForm'])->middleware(['auth', 'verified'])->name('update');
-Route::post('/update/{file_id}', [Search_suggest_updateController::class, 'update'])->middleware(['auth', 'verified'])->name('update');
-Route::get('/suggestions', [Search_suggest_updateController::class, 'suggestions'])->middleware(['auth', 'verified'])->name('suggestions');
+Route::get('/update/{file_id}', [Search_suggest_updateController::class, 'showUpdateForm'])->middleware('auth')->name('update');
+Route::post('/update/{file_id}', [Search_suggest_updateController::class, 'update'])->middleware('auth')->name('update');
+Route::get('/suggestions', [Search_suggest_updateController::class, 'suggestions'])->middleware('auth')->name('suggestions');
 // Route to delete a file
-// Route::delete('/files/{file}/delete', [Search_suggest_updateController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete');
+// Route::delete('/files/{file}/delete', [Search_suggest_updateController::class, 'destroy'])->middleware('auth')->name('delete');
 
 // Route to update the file
 // Route::post('/files/{file}', [FilesController::class, 'update'])->name('files.update');
 
 
 
-// Route::post('/upload', [FilesController::class, 'store'])->middleware(['auth', 'verified'])->name('upload');
+// Route::post('/upload', [FilesController::class, 'store'])->middleware('auth')->name('upload');
 
 
 
