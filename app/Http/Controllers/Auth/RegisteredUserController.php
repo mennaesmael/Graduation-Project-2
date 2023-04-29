@@ -63,7 +63,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'is_suspended' => "مفعل",
         ]);
-
+//
         event(new Registered($user));
         // track registration
         $track = new track_user();
