@@ -81,12 +81,6 @@
 @endif
 </x-guest-layout>
 </div>
-{{--
-<footer  class="bg-neutral-100  text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left ">
-    <div class="bg-neutral-200 p-6 text-center dark:bg-gray-900  ">
-        <span>المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
 
-      </div>
-</footer> --}}
 </body>
 </html>

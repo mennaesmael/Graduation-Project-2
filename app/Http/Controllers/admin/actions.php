@@ -17,38 +17,38 @@ class actions extends Controller
     {
         $query = track_user::query();
 
-        if ($request->filled('user_id')) {
-            $query->where('user_id', $request->input('user_id'));
+        if ($request->filled("user_id")) {
+            $query->where("user_id", $request->input("user_id"));
         }
 
         $actions = $query->paginate(30);
 
-        return view('admin.track', compact('actions'));
+        return view("admin.track", compact("actions"));
     }
     //show users
     public function Show_users(Request $request)
     {
         $query = user_table::query();
 
-        if ($request->filled('user_id')) {
-            $query->where('user_id', $request->input('user_id'));
+        if ($request->filled("user_id")) {
+            $query->where("user_id", $request->input("user_id"));
         }
 
         $users = $query->paginate(10);
 
-        return view('admin.user', compact('users'));
+        return view("admin.user", compact("users"));
     }
     //make admin
     public function makeAdmin($user_id)
     {
         $user = User::find($user_id);
 
-        if ($user->admin == 'نعم') {
-            $user->admin = 'لا';
+        if ($user->admin == "نعم") {
+            $user->admin = "لا";
             $user->save();
             return back();
         } else {
-            $user->admin = 'نعم';
+            $user->admin = "نعم";
             $user->save();
             return back();
         }
@@ -57,18 +57,21 @@ class actions extends Controller
     public function suspendUser($user_id)
     {
         $user = User::find($user_id);
-        if ($user->is_suspended === 'مفعل') {
-            $user->is_suspended = 'تم ايقافه';
+        if ($user->is_suspended === "مفعل") {
+            $user->is_suspended = "تم ايقافه";
             $user->save();
 
-            if (Auth::user()->user_id === $user->user_id) { // check if the suspended user is the same as the authenticated user
+            if (Auth::user()->user_id === $user->user_id) {
+                // check if the suspended user is the same as the authenticated user
                 Auth::logout();
-                return redirect()->route('login')->with('message', 'تم إيقاف حسابك.');
+                return redirect()
+                    ->route("login")
+                    ->with("message", "تم إيقاف حسابك.");
             } else {
                 return redirect()->back();
             }
         } else {
-            $user->is_suspended = 'مفعل';
+            $user->is_suspended = "مفعل";
             $user->save();
             return back();
         }

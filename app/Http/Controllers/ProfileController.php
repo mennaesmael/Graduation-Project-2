@@ -6,7 +6,6 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\track_user;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -17,8 +16,8 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        return view("profile.edit", [
+            "user" => $request->user(),
         ]);
     }
 
@@ -29,38 +28,21 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
+        if ($request->user()->isDirty("email")) {
             // $request->user()->email_verified_at = null;
             $track = new track_user();
-            $track->action = 'update email';
+            $track->action = "update email";
             $track->user_id = $request->user()->user_id;
             $track->save();
         }
 
         $request->user()->save();
 
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route("profile.edit")->with(
+            "status",
+            "profile-updated"
+        );
     }
 
-    // /**
-    //  * Delete the user's account.
-    //  */
-    // public function destroy(Request $request): RedirectResponse
-    // {
-    //     $request->validateWithBag('userDeletion', [
-    //         'password' => ['required', 'current-password'],
-    //     ]);
 
-    //     $user = $request->user();
-
-    //     Auth::logout();
-
-    //     $user->delete();
-
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-
-    //     return Redirect::to('/');
-    // }
 }

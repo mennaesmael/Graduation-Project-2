@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use Laravel\Scout\Searchable;
 use Elastic\ScoutDriverPlus\Searchable;
 
 
@@ -30,18 +29,6 @@ class FilesTable extends Model
         return 'files';
     }
 
-//     public function searchableRouting()
-//     {
-//         return $this->user_id;
-//     }
-//     public function searchableWith()
-//     {
-//         return [];
-//     }
-//     public static function model()
-// {
-//     return new static();
-// }
 
 
 public function searchableOptions()

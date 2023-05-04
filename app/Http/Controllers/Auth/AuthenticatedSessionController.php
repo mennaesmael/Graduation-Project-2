@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view("auth.login");
     }
 
     /**
@@ -29,35 +29,37 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-
         /** @var User $user */
         $user = Auth::user();
         if ($user->is_suspended !== "مفعل") {
             Auth::logout();
-            return redirect()->back()->withErrors(['email' => 'حسابك تم ايقافه']);
+            return redirect()
+                ->back()
+                ->withErrors(["email" => "حسابك تم ايقافه"]);
         }
-// to know when user loged in
-        $user->last_login = now('Africa/Cairo');
+        // to know when user loged in
+        $user->last_login = now("Africa/Cairo");
         $user->save();
-        user_table::where('user_id', '<>', $user->user_id)->update(['last_login' => null]);
+        user_table::where("user_id", "<>", $user->user_id)->update([
+            "last_login" => null,
+        ]);
 
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-
     /**
      * Destroy an authenticated session.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        Auth::guard("web")->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect("/");
     }
 }
