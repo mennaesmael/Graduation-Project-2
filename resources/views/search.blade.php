@@ -228,7 +228,7 @@
                                                 <tr>
                                                     <th
                                                         class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                        رقم التسلسل</th>
+                                                        #</th>
                                                     <th
                                                         class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                                         معرف الملف</th>
@@ -409,32 +409,6 @@
 
 
 
-
-                        {{--
-        <div class="py-12">
-
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white 0 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 ">
-                        <a href="{{ route('upload') }}">{{ __("اذهب الي صفحة رفع الملفات") }}</a>
-                    </div>
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <a href="{{ route('search') }}">{{ __("اذهب الي صفحة البحث") }}</a>
-                    </div>
-                    @can('admin')
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <a href="{{ route('admin.dashboard') }}">ادارة قاعدة البيانات</a>
-                    </div>
-                    @endcan
-                </div>
-            </div>
-        </div>
-    </div> --}}
-                        {{-- @can('admin')
-    <div class="p-6 text-gray-900 dark:text-gray-100">
-        <a href="{{ route('admin.dashboard') }}">ادارة قاعدة البيانات</a>
-    </div>
-    @endcan --}}
             </x-app-layout>
         </div>
 
@@ -491,7 +465,7 @@
 <script>
     Swal.fire({
         icon: 'error',
-        title: 'Error!',
+        title: 'خطأ',
         text: '{{ session('error') }}',
     })
 </script>

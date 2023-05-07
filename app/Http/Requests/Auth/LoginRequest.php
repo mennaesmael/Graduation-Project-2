@@ -52,7 +52,7 @@ class LoginRequest extends FormRequest
         $user = Auth::user();
         track_user::create([
             'user_id' => $user->user_id,
-            'action' => 'login',
+            'action' => 'قام بتسجيل الدخول',
         ]);
         RateLimiter::clear($this->throttleKey());
     }

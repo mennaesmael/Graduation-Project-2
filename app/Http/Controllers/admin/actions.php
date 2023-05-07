@@ -25,6 +25,7 @@ class actions extends Controller
 
         return view("admin.track", compact("actions"));
     }
+
     //show users
     public function Show_users(Request $request)
     {
@@ -38,6 +39,7 @@ class actions extends Controller
 
         return view("admin.user", compact("users"));
     }
+
     //make admin
     public function makeAdmin($user_id)
     {
@@ -53,6 +55,7 @@ class actions extends Controller
             return back();
         }
     }
+    
     //suspend user
     public function suspendUser($user_id)
     {

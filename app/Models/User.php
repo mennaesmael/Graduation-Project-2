@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use App\Notifications\PasswordReset; // Or the location that you store your notifications (this is default).
+use App\Notifications\PasswordReset; 
 
 
 class User extends Authenticatable

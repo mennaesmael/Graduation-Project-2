@@ -15,35 +15,27 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// welcome page
 Route::get('/', function () {
     return view('welcome');
 });
-
+// dashboard page
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
-
+// upload page
 Route::get('/upload', function () {
     return view('upload');
 })->middleware('auth')->name('upload');
-Route::post('/upload', [FilesController::class, 'store'])->middleware('auth')->name('upload');
 
+Route::post('/upload', [FilesController::class, 'store'])->middleware('auth')->name('upload');
+// search page
 Route::get('/search', [Search_suggest_updateController::class, 'search'])->middleware('auth')->name('search');
-// Route::get('/files/{id}/update', [SearchController::class, 'showUpdateForm'])->name('update');
+// update page
 Route::get('/update/{file_id}', [Search_suggest_updateController::class, 'showUpdateForm'])->middleware('auth')->name('update');
 Route::post('/update/{file_id}', [Search_suggest_updateController::class, 'update'])->middleware('auth')->name('update');
+// suggestion list
 Route::get('/suggestions', [Search_suggest_updateController::class, 'suggestions'])->middleware('auth')->name('suggestions');
-// Route to delete a file
-// Route::delete('/files/{file}/delete', [Search_suggest_updateController::class, 'destroy'])->middleware('auth')->name('delete');
-
-// Route to update the file
-// Route::post('/files/{file}', [FilesController::class, 'update'])->name('files.update');
-
-
-
-// Route::post('/upload', [FilesController::class, 'store'])->middleware('auth')->name('upload');
-
 
 
 Route::middleware('auth')->group(function () {

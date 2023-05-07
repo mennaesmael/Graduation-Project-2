@@ -191,7 +191,7 @@
                             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                             <script>
                                 Swal.fire({
-                                    title: "نجاح!",
+                                    title: "تم بنجاح",
                                     text: "{{ session('success') }}",
                                     icon: "success",
                                     confirmButtonText: "OK"
@@ -203,26 +203,7 @@
 
 
 
-                    {{--
-        <div class="py-12">
 
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white 0 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 ">
-                        <a href="{{ route('upload') }}">{{ __("اذهب الي صفحة رفع الملفات") }}</a>
-                    </div>
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <a href="{{ route('search') }}">{{ __("اذهب الي صفحة البحث") }}</a>
-                    </div>
-                    @can('admin')
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <a href="{{ route('admin.dashboard') }}">ادارة قاعدة البيانات</a>
-                    </div>
-                    @endcan
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
             </x-app-layout>
         </div>
@@ -230,29 +211,6 @@
     </div>
 
 
-
-    {{-- <table class="table text-right">
-
-    <tr class="my-9">
-        <td class="table-header text-lg font-semibold">اسم الملف:<span class="text-red-600">*</span> </td>
-        <td><input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus></td>
-    </tr>
-    <tr class="my-9">
-        <td class="table-header text-lg font-semibold">اختر الملف:<span class="text-red-600">*</span></td>
-        <td>
-            <div class="file-input-container">
-                <label for="file" class="file-label"></label>
-                <input id="file" name="file" class="file-input" aria-describedby="file_input_help" type="file" required>
-              </div>
-
-        </td>
-    </tr>
-    <tr class="my-9">
-        <td class="table-header text-lg font-semibold">ملاحظات</td>
-        <td><textarea id="notes" name="notes" class="form-control
-             focus:border-indigo-500 focus:ring-indigo-500 " rows="4" cols="50">{{ old('notes') }}</textarea></td>
-
-</table> --}}
 
 
 

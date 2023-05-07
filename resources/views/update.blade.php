@@ -77,7 +77,7 @@
                                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                                     <script>
                                         Swal.fire({
-                                            title: "Success!",
+                                            title: "تم بنجاح",
                                             text: "{{ session('تم بنجاح') }}",
                                             icon: "success",
                                             confirmButtonText: "OK"

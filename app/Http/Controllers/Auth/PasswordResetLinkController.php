@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class PasswordResetLinkController extends Controller
 {
-    
+
     /**
      * Display the password reset link request view.
      */
@@ -37,9 +37,14 @@ class PasswordResetLinkController extends Controller
 
         $statusMessage = 'تم ارسال رابط اعادة تعيين كلمة المرور الي البريد الالكتروني الخاص بك';
         $errorMessage = 'لا يوجد مثل هذا الحساب';
+        $throttledMessage = 'من فضلك حاول بعد فترة قصيرة';
 
-        return $status == Password::RESET_LINK_SENT
-            ? back()->with('status', $statusMessage)
-            : back()->withInput($request->only('email'))->withErrors(['email' => __($status === Password::INVALID_USER ? $errorMessage : $status)]);
+        if ($status == Password::RESET_LINK_SENT) {
+            return back()->with('status', $statusMessage);
+        } elseif ($status == Password::INVALID_USER) {
+            return back()->withInput($request->only('email'))->withErrors(['email' => __($errorMessage)]);
+        } else {
+            return back()->withInput($request->only('email'))->withErrors(['email' => __($throttledMessage)]);
+        }
     }
 }

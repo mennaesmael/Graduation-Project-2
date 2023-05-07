@@ -157,7 +157,7 @@
                                         <table class="table">
                                             <thead class="text-primary">
                                                 <tr>
-                                                    <th>المعرف</th>
+                                                    <th>#</th>
                                                     <th>معرف المستخدم</th>
                                                     <th> معرف الملف</th>
                                                     <th>النشاط</th>

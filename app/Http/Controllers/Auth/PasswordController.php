@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Models\track_user;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,7 +32,7 @@ class PasswordController extends Controller
         ]);
 
         $track = new track_user();
-        $track->action = 'update password';
+        $track->action = 'قام بتحديث كلمة المرور';
         $track->user_id = $request->user()->user_id;
         $track->save();
         return back()->with('status', 'password-updated');

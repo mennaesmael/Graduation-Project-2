@@ -31,7 +31,7 @@ class ProfileController extends Controller
         if ($request->user()->isDirty("email")) {
             // $request->user()->email_verified_at = null;
             $track = new track_user();
-            $track->action = "update email";
+            $track->action = "قام بتحديث البريد الالكتروني";
             $track->user_id = $request->user()->user_id;
             $track->save();
         }

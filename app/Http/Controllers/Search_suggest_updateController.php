@@ -21,7 +21,7 @@ class Search_suggest_updateController extends Controller
         // track search
         if (!empty($file_query) || !empty($user_query)) {
             $track = new track_user();
-            $track->action = "search";
+            $track->action = "قام بالبحث عن ملف";
             $track->user_id = Auth::user()->user_id;
 
             if (!empty($file_query)) {
@@ -35,13 +35,13 @@ class Search_suggest_updateController extends Controller
             }
 
             if (!empty($file_query) && !empty($user_query)) {
-                $track->action = "search";
+                $track->action = "قام بالبحث عن ملف";
                 $track->user_id = Auth::user()->user_id;
                 $track->search_input = $file_query;
                 $track->save();
 
                 $track = new track_user();
-                $track->action = "search";
+                $track->action = " قام بالبحث عن ملف";
                 $track->user_id = Auth::user()->user_id;
                 $track->search_input = $user_query;
                 $track->save();
@@ -172,7 +172,7 @@ class Search_suggest_updateController extends Controller
         $track = new track_user();
         $track->file_id = $file->file_id;
         $track->updated_by = auth()->user()->name;
-        $track->action = "update";
+        $track->action = "قام بتحديث ملف";
         $track->user_id = Auth::user()->user_id;
         $track->save();
 

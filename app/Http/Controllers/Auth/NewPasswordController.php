@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\track_user;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
@@ -34,6 +35,8 @@ class NewPasswordController extends Controller
             "password.required" => "كلمة المرور مطلوبة",
             "password.confirmed" => "كلمة المرور غير متطابقين",
             "email.required" => "لبريد الالكتروني مطلوب",
+            "email.email" => "البريد الالكتروني غير صالح"
+
         ];
         $request->validate(
             [
@@ -67,25 +70,33 @@ class NewPasswordController extends Controller
                     ->save();
 
                 event(new PasswordReset($user));
+                // track user action
+                $track = new track_user();
+                $track->action = 'قام بإعادة ضبط  كلمة المرور';
+                $track->user_id = $user->user_id;;
+                $track->save();
             }
+
         );
+
 
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
+        $successMessage = "تم اعادة ضبط كلمة المرور بنجاح";
         $errorMessage = "لا يوجد مثل هذا الحساب";
         return $status == Password::PASSWORD_RESET
             ? redirect()
-                ->route("login")
-                ->with("status", __($status))
+            ->route("login")
+            ->with("status", __($successMessage))
             : back()
-                ->withInput($request->only("email"))
-                ->withErrors([
-                    "email" => __(
-                        $status === Password::INVALID_USER
-                            ? $errorMessage
-                            : $status
-                    ),
-                ]);
+            ->withInput($request->only("email"))
+            ->withErrors([
+                "email" => __(
+                    $status === Password::INVALID_USER
+                        ? $errorMessage
+                        : $status
+                ),
+            ]);
     }
 }

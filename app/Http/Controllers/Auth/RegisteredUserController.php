@@ -75,11 +75,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
         // track registration
         $track = new track_user();
-        $track->action = "register";
+        $track->action = "قام بتسجيل مستخدم جديد";
         $track->user_id = Auth::user()->user_id;
         $track->New_User_Registerd = $user->id;
         $track->save();
 
-        return back()->with("success", "تم تسحجيل الموظف ");
+        return back()->with("success", "تم بنجاح");
     }
 }

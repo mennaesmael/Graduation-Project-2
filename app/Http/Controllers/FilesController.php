@@ -37,17 +37,16 @@ class FilesController extends Controller
         $fileRecord->file_path = $path;
         $fileRecord->file_size = $file->getSize();
         $fileRecord->file_extension = $file->getClientOriginalExtension();
-        $fileRecord->notes = $request->notes ?? 'no notes';
-        $fileRecord->updated_by = 'not yet updated';
+        $fileRecord->notes = $request->notes ?? 'لا يوجد ملاحظات';
+        $fileRecord->updated_by = 'لم يتم تحديثه بعد';
         $fileRecord->save();
-// track files
+        // track files
         $track = new track_user();
-        $track->action = 'upload';
+        $track->action = 'قام برفع الملفات';
         $track->user_id = $user->user_id;
         $track->file_id = $fileRecord->file_id;
         $track->save();
         $fileRecord->save();
         return redirect()->route('upload')->with('success', 'تم بنجاح رفع' . " ملف " . $fileName);
     }
-   
 }
