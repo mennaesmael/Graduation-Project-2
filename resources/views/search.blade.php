@@ -135,7 +135,7 @@
               motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل الموظفين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
 
                             </a>
 
@@ -151,7 +151,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
 
                             </a>
 
@@ -167,7 +167,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
 
                             </a>
 
@@ -204,8 +204,7 @@
 
                                 <input
                                     class="w-full py-2 px-4 border border-gray-400 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                    type="text" name="user_query"
-                                    placeholder="..البحث باسم من رفع الملف"
+                                    type="text" name="user_query" placeholder="..البحث باسم من رفع الملف"
                                     aria-label="Search by user name">
                                 <button
                                     class="bg-blue-700 hover:bg-blue-500 text-white font-bold
@@ -282,113 +281,116 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($files as $index => $file)
-                                                @if ($file->model())
-                                                    <tr>
-                                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $index + 1 }}</span>
-                                                        </td>
-                                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->file_id }}</span>
-                                                        </td>
-                                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->user_id }}</span>
-                                                        </td>
-                                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->user_name }}</span>
-                                                        </td>
-                                                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->file_name }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->file_extension }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->file_size }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->notes }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->file_path }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->created_at }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->updated_at }}</span>
-                                                        </td>
-                                                        <td
-                                                            class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                            <span
-                                                                class="font-medium text-gray-800">{{ $file->model()->updated_by }}</span>
-                                                        </td>
+                                                    @if ($file->model())
+                                                        <tr>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $index + 1 }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->file_id }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->user_id }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->user_name }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->file_name }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->file_extension }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->file_size }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->notes }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->file_path }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->created_at }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->updated_at }}</span>
+                                                            </td>
+                                                            <td
+                                                                class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                                <span
+                                                                    class="font-medium text-gray-800">{{ $file->model()->updated_by }}</span>
+                                                            </td>
 
-                                                        <td
-                                                            class="px-3 py-3 border-b border-gray-200 bg-white text-sm">
-                                                            @if ($file->model()->file_id)
-                                                                <form method="GET"
-                                                                    action="{{ route('update', $file->model()->file_id) }}">
-                                                                    @csrf
-                                                                    <button type="submit"
-                                                                        class="p-1 rounded-lg hover:bg-gray-100">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            class="h-6 w-6 text-blue-500 hover:text-blue-700"
-                                                                            fill="none" viewBox="0 0 24 24"
-                                                                            stroke="currentColor">
-                                                                            <path
-                                                                                d="M18 13v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h9l5 5zm-8.5-1.5L7 10l1.5-1.5L11 9V4h2v5l2.5-1.5z" />
-                                                                        </svg>
-                                                                    </button>
-                                                                </form>
-                                                            @endif
-                                                        </td>
+                                                            <td
+                                                                class="px-3 py-3 border-b border-gray-200 bg-white text-sm">
+                                                                @if ($file->model()->file_id)
+                                                                    <form method="GET"
+                                                                        action="{{ route('update', $file->model()->file_id) }}">
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            class="p-1 rounded-lg hover:bg-gray-100">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                class="h-6 w-6 text-blue-500 hover:text-blue-700"
+                                                                                fill="none" viewBox="0 0 24 24"
+                                                                                stroke="currentColor">
+                                                                                <path
+                                                                                    d="M18 13v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h9l5 5zm-8.5-1.5L7 10l1.5-1.5L11 9V4h2v5l2.5-1.5z" />
+                                                                            </svg>
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
 
-                                                        <td
-                                                            class="px-3 py-3 border-b border-gray-200 bg-white text-sm">
-                                                            @if ($file->model()->file_id)
-                                                                <form
-                                                                    {{-- action="{{ route('delete', $file->model()->file_id) }}" --}}
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class=" delete-button text-red-500 hover:text-red-700">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            class="h-5 w-5" viewBox="0 0 20 20"
-                                                                            fill="currentColor">
-                                                                            <path fill-rule="evenodd"
-                                                                                d="M15.707 4.293a1 1 0 00-1.414 0L10 8.586 5.707 4.293a1 1 0 10-1.414 1.414L8.586 10l-4.293 4.293a1 1 0 101.414 1.414L10 11.414l4.293 4.293a1 1 0 001.414-1.414L11.414 10l4.293-4.293a1 1 0 000-1.414z"
-                                                                                clip-rule="evenodd" />
+                                                            <td
+                                                                class="px-3 py-3 border-b border-gray-200 bg-white text-sm">
+                                                                @if ($file->model()->file_id)
+                                                                    <form {{-- action="{{ route('delete', $file->model()->file_id) }}" --}} method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class=" delete-button text-red-500 hover:text-red-700">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                class="h-5 w-5" viewBox="0 0 20 20"
+                                                                                fill="currentColor">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M15.707 4.293a1 1 0 00-1.414 0L10 8.586 5.707 4.293a1 1 0 10-1.414 1.414L8.586 10l-4.293 4.293a1 1 0 101.414 1.414L10 11.414l4.293 4.293a1 1 0 001.414-1.414L11.414 10l4.293-4.293a1 1 0 000-1.414z"
+                                                                                    clip-rule="evenodd" />
 
-                                                                        </svg>
+                                                                            </svg>
 
-                                                                    </button>
-                                                                </form>
-                                                            @endif
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
 
-                                                        </td>
+                                                            </td>
 
 
 
 
-                                                    </tr>
+                                                        </tr>
                                                     @endif
                                                 @endforeach
                                             </tbody>
@@ -453,23 +455,23 @@
         });
     </script>
     <!-- SweetAlert CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- SweetAlert JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
 
-@if (session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'خطأ',
-        text: '{{ session('error') }}',
-    })
-</script>
-@endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'خطأ',
+                text: '{{ session('error') }}',
+            })
+        </script>
+    @endif
 
 </body>
 

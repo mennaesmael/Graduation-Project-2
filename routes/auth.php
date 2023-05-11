@@ -35,8 +35,6 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
 
-   
-
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
 
@@ -47,19 +45,18 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-        Route::get('dashboard', [admin_dashboard::class, 'get_information'])->name('dashboard');
+    Route::get('dashboard', [admin_dashboard::class, 'get_information'])->name('dashboard');
 
 
-        // for admins
+    // for admins
     Route::middleware('can:admin')->group(function () {
         Route::get('register', [RegisteredUserController::class, 'create'])
             ->name('register');
 
         Route::post('register', [RegisteredUserController::class, 'store']);
-
         Route::get('/admin/track', [actions::class, 'track'])->name('tracking');
         Route::get('/admin/user', [actions::class, 'Show_users'])->name('workers');
-                Route::post('/make-admin/{user_id}', [actions::class,'makeAdmin']);
-                Route::post('/suspend/{user_id}', [actions::class, 'suspendUser']);
+        Route::post('/make-admin/{user_id}', [actions::class, 'makeAdmin']);
+        Route::post('/suspend/{user_id}', [actions::class, 'suspendUser']);
     });
 });

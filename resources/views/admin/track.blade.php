@@ -97,7 +97,7 @@
                   motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل الموظفين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
 
                             </a>
 
@@ -113,7 +113,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
 
                             </a>
 
@@ -129,7 +129,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
 
                             </a>
 
@@ -147,46 +147,67 @@
                     <div class="col-md-12  mr-4 mt-7 text-center">
                         <div class="card w-11/12">
                             <div class="card-header">
-                                <h4 class="card-title text-2xl font-bold"> نشاط المستخدمين</h4>
+                                <h4 class="card-title text-2xl font-bold"> نشاط العاملين</h4>
                             </div>
                             <div class="card-body">
-                                @if ($actions->isEmpty())
-                                    <p>No users found.</p>
-                                @else
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class="text-primary">
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>معرف المستخدم</th>
-                                                    <th> معرف الملف</th>
-                                                    <th>النشاط</th>
-                                                    <th>جمل بحث المستحدم</th>
-                                                    <th>تم تحديثه بواسطة</th>
-                                                    <th>وقت حدوث النشاط</th>
-                                                    <th>تسجيل مستخدم جديد
-                                                    </th>
+                                <form class="flex items-center" method="GET" action="{{ route('tracking') }}">
+                                    <label for="simple-search" class="sr-only">Search</label>
+                                    <div class="relative w-full">
+                                        <div
+                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($actions as $action)
+                                        </div>
+                                        <input type="text" name="user_id"
+                                            class="bg-blue-50 border border-blue-300 text-blue-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-blue-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="البحث عن موظف عن طريق المعرف الخاص به" required>
+                                    </div>
+                                    <button type="submit"
+                                        class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                        <span class="sr-only">Search</span>
+                                    </button>
+                                </form>
+                                @if (isset($actions))
+                                    @if ($actions->isEmpty())
+                                        <h1 style="font-size: 150%">لا يوجد موظفين</h1>
+                                    @else
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="text-primary">
                                                     <tr>
-                                                        <td>{{ $action->id }}</td>
-                                                        <td>{{ $action->user_id }}</td>
-                                                        <td>{{ $action->file_id }}</td>
-                                                        <td>{{ $action->action }}</td>
-                                                        <td>{{ $action->search_input }}</td>
-                                                        <td>{{ $action->updated_by }}</td>
-                                                        <td>{{ $action->created_at }}</td>
-                                                        <td>{{ $action->New_User_Registerd }}</td>
+                                                        <th>#</th>
+                                                        <th>معرف المستخدم</th>
+                                                        <th> معرف الملف</th>
+                                                        <th>النشاط</th>
+                                                        <th>جمل بحث المستحدم</th>
+                                                        <th>تم تحديثه بواسطة</th>
+                                                        <th>وقت حدوث النشاط</th>
+                                                        <th>تسجيل مستخدم جديد
+                                                        </th>
 
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    {{ $actions->links() }}
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($actions as $action)
+                                                        <tr>
+                                                            <td>{{ $action->model()->id }}</td>
+                                                            <td>{{ $action->model()->user_id }}</td>
+                                                            <td>{{ $action->model()->file_id }}</td>
+                                                            <td>{{ $action->model()->action }}</td>
+                                                            <td>{{ $action->model()->search_term }}</td>
+                                                            <td>{{ $action->model()->updated_by }}</td>
+                                                            <td>{{ $action->model()->created_at }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {{ $actions->appends(['user_id' => $user_query])->links() }}
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -226,7 +247,3 @@
 </body>
 
 </html>
-
-
-
-

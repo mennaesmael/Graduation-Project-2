@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Auth;
+use Elastic\ScoutDriverPlus\Support\Query;
 
 use App\Models\track_user;
 use App\Http\Controllers\Controller;
@@ -15,17 +16,41 @@ class actions extends Controller
     //track users
     public function track(Request $request)
     {
-        $query = track_user::query();
+        $user_query = $request->input("user_id");
 
-        if ($request->filled("user_id")) {
-            $query->where("user_id", $request->input("user_id"));
+        // Check if the user_query is empty, then return the view without results
+        if (empty($user_query)) {
+            return view("admin.track");
         }
 
-        $actions = $query->paginate(30);
+        $query = $this->buildElasticsearchQuery($user_query);
+        $actions = track_user::searchQuery($query)->paginate(40);
 
-        return view("admin.track", compact("actions"));
+        return view("admin.track", compact("user_query", "query", "actions"));
     }
 
+// elasticsearch
+private function buildElasticsearchQuery($user_query)
+    {
+        return Query::bool()->when(
+             !empty($user_query),
+            function ($builder) use ( $user_query) {
+                if (!empty($user_query)) {
+                    $builder->must(
+                        Query::match()
+                            ->field("user_id")
+
+                            ->query($user_query)
+                    );
+                }
+
+
+            },
+            function ($builder) {
+                return $builder->must(Query::matchAll());
+            }
+        );
+    }
     //show users
     public function Show_users(Request $request)
     {
@@ -33,6 +58,10 @@ class actions extends Controller
 
         if ($request->filled("user_id")) {
             $query->where("user_id", $request->input("user_id"));
+        }
+        // search for specific user
+        if ($request->filled("user_name")) {
+            $query->where("name", "LIKE", "%" . $request->input("user_name") . "%");
         }
 
         $users = $query->paginate(10);
@@ -55,7 +84,7 @@ class actions extends Controller
             return back();
         }
     }
-    
+
     //suspend user
     public function suspendUser($user_id)
     {

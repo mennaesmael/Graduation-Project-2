@@ -91,7 +91,7 @@
                   motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل الموظفين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
 
                             </a>
 
@@ -107,7 +107,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
 
                             </a>
 
@@ -123,7 +123,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
 
                             </a>
 
@@ -167,28 +167,34 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                              <td>{{ auth()->user()->user_id }}</td>
-                                              <td>{{ auth()->user()->name }}</td>
-                                              <td>{{ auth()->user()->email }}</td>
-                                              <td>{{ auth()->user()->last_login }}</td>
-                                              <td>
-                                                <select>
-                                                  @foreach ($userFilesByMonth as $entry)
-                                                  <option value="{{ $entry->month }}-{{ $entry->year }}">{{ $entry->count }} ({{ $entry->month }}/{{ $entry->year }})</option>
-                                                  @endforeach
-                                                </select>
-                                              </td>
-                                              @can('admin')
-                                              <td>
-                                                <select>
-                                                  @foreach ($filesByMonth as $entry)
-                                                  <option value="{{ $entry->month }}-{{ $entry->year }}">{{ $entry->count }} ({{ $entry->month }}/{{ $entry->year }})</option>
-                                                  @endforeach
-                                                </select>
-                                              </td>
-                                              @endcan
+                                                <td>{{ auth()->user()->user_id }}</td>
+                                                <td>{{ auth()->user()->name }}</td>
+                                                <td>{{ auth()->user()->email }}</td>
+                                                <td>{{ auth()->user()->last_login }}</td>
+                                                <td>
+                                                    <select>
+                                                        @foreach ($userFilesByMonth as $entry)
+                                                            <option value="{{ $entry->month }}-{{ $entry->year }}">
+                                                                {{ $entry->count }}
+                                                                ({{ $entry->month }}/{{ $entry->year }})
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                @can('admin')
+                                                    <td>
+                                                        <select>
+                                                            @foreach ($filesByMonth as $entry)
+                                                                <option value="{{ $entry->month }}-{{ $entry->year }}">
+                                                                    {{ $entry->count }}
+                                                                    ({{ $entry->month }}/{{ $entry->year }})
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                @endcan
                                             </tr>
-                                            </tbody>
+                                        </tbody>
 
                                 </div>
                             </div>
@@ -197,7 +203,7 @@
 
 
 
-                    
+
 
             </x-app-layout>
         </div>

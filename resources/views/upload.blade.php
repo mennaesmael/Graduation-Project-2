@@ -90,7 +90,7 @@
                   motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل الموظفين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
 
                             </a>
 
@@ -106,7 +106,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
 
                             </a>
 
@@ -122,7 +122,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
 
                             </a>
 
@@ -147,19 +147,19 @@
 
                         <p class="card-category text-2xl font-semibold text-black text-center m-4 mt-n2">رفع ملف</p>
                         @if ($errors->any())
-                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                        <script>
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'خطا',
-                                html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
-                                showCloseButton: true,
-                                showCancelButton: false,
-                                focusConfirm: false,
-                                confirmButtonText: 'OK',
-                            });
-                        </script>
-                    @endif
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            <script>
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'خطا',
+                                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                                    showCloseButton: true,
+                                    showCancelButton: false,
+                                    focusConfirm: false,
+                                    confirmButtonText: 'OK',
+                                });
+                            </script>
+                        @endif
                         <form method="POST" action="{{ route('upload') }}" enctype="multipart/form-data"
                             id="upload-form" class="mt-3 mt-n2">
                             @csrf

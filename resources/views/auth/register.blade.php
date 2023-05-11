@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>تسجيل الموظفين-إدارة الحفائر قطاع الأثار المصرية-المجلس الاعلي للآثار</title>
+    <title>تسجيل العاملين-إدارة الحفائر قطاع الأثار المصرية-المجلس الاعلي للآثار</title>
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -90,7 +90,7 @@
               motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل الموظفين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
 
                             </a>
 
@@ -106,7 +106,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
 
                             </a>
 
@@ -122,7 +122,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
 
                             </a>
 
@@ -155,7 +155,7 @@
                                 class="grid grid-cols-2  text-right gap-6  w-10/12  pr-11">
                                 @csrf
                                 <div class="items-center content-center  text-center col-span-2">
-                                    <span class="text-2xl font-semibold  "> تسجيل الموظفين</span>
+                                    <span class="text-2xl font-semibold  "> تسجيل العاملين</span>
 
                                 </div>
 
@@ -222,15 +222,15 @@
 
                             </form>
                             @if (session('success'))
-                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                            <script>
-                                Swal.fire({
-                                    title: "تم بنجاح",
-                                    icon: "success",
-                                    confirmButtonText: "OK"
-                                });
-                            </script>
-                        @endif
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                <script>
+                                    Swal.fire({
+                                        title: "تم بنجاح",
+                                        icon: "success",
+                                        confirmButtonText: "OK"
+                                    });
+                                </script>
+                            @endif
                         </x-guest-layout>
 
 
