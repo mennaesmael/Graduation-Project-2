@@ -138,10 +138,15 @@ return [
     |
     */
 
+    // 'maintenance' => [
+    //     'driver' => 'file',
+    //     // 'store'  => 'redis',
+    // ],
     'maintenance' => [
-        'driver' => 'file',
-        // 'store'  => 'redis',
+        'driver' => 'cache',
+        'store'  => 'redis',
     ],
+
 
     /*
     |--------------------------------------------------------------------------

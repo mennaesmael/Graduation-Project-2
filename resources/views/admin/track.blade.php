@@ -193,16 +193,19 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($actions as $action)
-                                                        <tr>
-                                                            <td>{{ $action->model()->id }}</td>
-                                                            <td>{{ $action->model()->user_id }}</td>
-                                                            <td>{{ $action->model()->file_id }}</td>
-                                                            <td>{{ $action->model()->action }}</td>
-                                                            <td>{{ $action->model()->search_term }}</td>
-                                                            <td>{{ $action->model()->updated_by }}</td>
-                                                            <td>{{ $action->model()->created_at }}</td>
-                                                        </tr>
-                                                    @endforeach
+                                                        @if ($action->model() !== null)
+
+                                                            <tr>
+                                                                <td>{{ $action->model()->id }}</td>
+                                                                <td>{{ $action->model()->user_id }}</td>
+                                                                <td>{{ $action->model()->file_id }}</td>
+                                                                <td>{{ $action->model()->action }}</td>
+                                                                <td>{{ $action->model()->search_term }}</td>
+                                                                <td>{{ $action->model()->updated_by }}</td>
+                                                                <td>{{ $action->model()->created_at }}</td>
+                                                            </tr>
+                                                            @endif
+                                                        @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

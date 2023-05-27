@@ -119,9 +119,9 @@ class Search_suggest_updateController extends Controller
         );
     }
     //cache
-    private function getCacheKey($file_query, $user_query, $page)
+    private function getCacheKey($file_query, $user_query, $page, $file_id = null)
     {
-        return "search:" . md5($file_query . "|" . $user_query . "|" . $page);
+        return "search:" . md5($file_query . "|" . $user_query . "|" . $page . "|" . $file_id);
     }
 
     //view update page
@@ -166,8 +166,10 @@ class Search_suggest_updateController extends Controller
         $file->updated_by = auth()->user()->name;
         $file->save();
 
-        // Clear the cache for search results after updating the file
-        Cache::tags(["search_results"])->flush();
+
+        // Clear the cache for the updated file
+        $updatedFileCacheKey = $this->getCacheKey($file->file_name, auth()->user()->name, $request->input("page", 1), $file_id);
+        Cache::tags(["search_results"])->forget($updatedFileCacheKey);
 
         $track = new track_user();
         $track->file_id = $file->file_id;
