@@ -435,7 +435,7 @@
                 return;
             }
 
-            fetch(`http://127.0.0.1:8001/suggestions?query=${encodeURIComponent(query)}`).then(response => response
+            fetch(`http://127.0.0.1:8000/suggestions?query=${encodeURIComponent(query)}`).then(response => response
                     .json())
                 .then(suggestions => {
                     datalist.innerHTML = '';
