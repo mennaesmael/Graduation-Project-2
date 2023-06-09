@@ -184,7 +184,8 @@
                                     rows="4" cols="50">{{ old('notes') }}</textarea>
                             </div>
                             <button type="submit"
-                                class="btn btn-outline-primary btn-lg mt-4">{{ __('رفع') }}</button>
+                                class="bg-blue-700 hover:bg-blue-500 text-white font-bold
+                                py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">{{ __('رفع') }}</button>
                         </form>
                         <br>
                         @if (session('success'))

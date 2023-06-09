@@ -17,14 +17,7 @@
 
 <body class="">
 
-    <footer
-        class="bg-neutral-100  text-neutral-600 dark:bg-gray-900 dark:text-neutral-200 lg:text-left absolute inset-x-0 bottom-0 ">
-        <div class="bg-neutral-200 p-6 text-left dark:bg-gray-900  ">
-            <span class="ml-96">المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
-
-
-        </div>
-    </footer>
+    
     <div class="grid grid-cols-5  ">
 
 
@@ -155,24 +148,25 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <p class="card-title text-2xl font-bold"> العاملين</p>
+                                            <p class="card-title text-3xl font-semibold text-gray-900 mb-4 text-center m-8"> العاملين</p>
 
                                         </div>
                                         <div class="card-body">
-                                            <form class="flex items-center" method="GET"
+                                            <form class="flex items-center justify-center content-center" method="GET"
                                                 action="{{ route('workers') }}">
                                                 <label for="simple-search" class="sr-only">Search</label>
-                                                <div class="relative w-full">
+                                                <div class="relative w-fit items-center content-center ">
                                                     <div
                                                         class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
                                                     </div>
                                                     <input type="text" name="user_name"
-                                                        class="bg-blue-50 border border-blue-300 text-blue-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-blue-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        class="bg-gray-100 border  text text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full pl-10 p-2.5  "
                                                         placeholder=" البحث عن موظف عن طريق الاسم" required>
                                                 </div>
                                                 <button type="submit"
-                                                    class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    class="items-center 
+                                                    p-2.5 mr-1 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -188,9 +182,9 @@
                                             @else
                                                 <div class="table-responsive">
                                                     <table class="table">
-                                                        <thead class="text-primary">
+                                                        <thead class="fw-bold text-orange-500">
                                                             <tr>
-                                                                <th>User_ID</th>
+                                                                <th>ID</th>
                                                                 <th>الأسم</th>
                                                                 <th>الأدمن</th>
                                                                 <th>الإيميل</th>
@@ -218,9 +212,9 @@
                                                                             @csrf
                                                                             <button type="submit"
                                                                                 id="make-admin-button"
-                                                                                class="btn {{ $user->admin === 'لا' ? 'btn-primary' : 'btn-secondary' }}"
-                                                                                style="background-color: transparent; border: 2px solid #ccc; color: #ff0000; padding: 10px 20px; transition: all 0.3s ease;">
-                                                                                {{ $user->admin === 'لا' ? 'جعله ادمن' : 'عدم جعله ادمن' }}
+                                                                                class=" btn {{ $user->admin === 'لا' ? 'btn-primary' : 'btn-secondary' }}"
+                                                                                style="background-color: transparent; border: 2px solid #ccc; color: #161616cc; padding: 10px 20px; transition: all 0.3s ease; font-size: 15px; font-weight:500;">
+                                                                                {{ $user->admin === 'لا' ? 'تفعيل الأدمن' : 'ايقاف الأدمن' }}
                                                                             </button>
                                                                         </form>
                                                                     </td>
@@ -230,7 +224,7 @@
                                                                             @csrf
                                                                             <button
                                                                                 class="suspend-button btn{{ $user->is_suspended === 'مفعل' ? 'btn-primary' : 'btn-secondary' }}"
-                                                                                style="background-color: transparent; border: 2px solid #ccc; color: #ff0000; padding: 10px 20px; transition: all 0.3s ease;">
+                                                                                style="background-color: transparent; border: 2px solid #ccc; color: #f54b4be9; padding: 10px 20px; transition: all 0.3s ease; font-size: 15px; font-weight:500;">
                                                                                 {{ $user->is_suspended === 'مفعل' ? 'ايقاف الحساب' : 'تفعيل الحساب' }}
                                                                             </button>
                                                                         </form>
@@ -253,7 +247,15 @@
 
     </div>
 
+    <footer
+    class="bg-neutral-100  text-neutral-600 dark:bg-gray-900 dark:text-neutral-200 lg:text-left inset-x-0 bottom-0 static
+overflow-hidden">
+    <div class="bg-neutral-200 p-6 text-left dark:bg-gray-900  ">
+        <span class="ml-96">المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
 
+
+    </div>
+</footer>
 
 
 

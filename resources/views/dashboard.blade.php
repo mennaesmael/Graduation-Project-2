@@ -23,7 +23,7 @@
 
         </div>
     </footer>
-    <div class="grid grid-cols-5  ">
+    <div class="grid grid-cols-5">
 
 
 
@@ -200,24 +200,9 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
             </x-app-layout>
         </div>
 
     </div>
-
-
-
-
-
-
-
 </body>
-
-
-
 </html>

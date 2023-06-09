@@ -150,19 +150,19 @@
                                 <h4 class="card-title text-2xl font-bold"> نشاط العاملين</h4>
                             </div>
                             <div class="card-body">
-                                <form class="flex items-center" method="GET" action="{{ route('tracking') }}">
+                                <form class="flex  items-center justify-center content-center"" method="GET" action="{{ route('tracking') }}">
                                     <label for="simple-search" class="sr-only">Search</label>
-                                    <div class="relative w-full">
+                                    <div class="relative">
                                         <div
                                             class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 
                                         </div>
                                         <input type="text" name="user_id"
-                                            class="bg-blue-50 border border-blue-300 text-blue-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-blue-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="البحث عن موظف عن طريق المعرف الخاص به" required>
+                                            class="bg-gray-100 border  text text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full pl-10 p-2.5"
+                                            placeholder="البحث عن موظف عن طريق ID" required>
                                     </div>
                                     <button type="submit"
-                                        class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 mr-1">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

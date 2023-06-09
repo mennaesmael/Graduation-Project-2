@@ -210,9 +210,11 @@
                                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
 
                                 </div>
+                               
 
-                                <div class="flex items-center justify-front   text-2xl  col-span-2 ">
-                                    <x-primary-button class="ml-4 textcolor    ">
+                                <div class="flex items-center justify-front    col-span-2 ">
+                                    <x-primary-button class="ml-4 textcolor  bg-blue-700 hover:bg-blue-500 text-white font-bold
+                                    py-2 px-4 rounded-md focus:outline-none focus:shadow-outline  ">
                                         <span class="text-lg ">{{ __('تسجيل') }}</span>
 
                                     </x-primary-button>

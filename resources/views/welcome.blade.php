@@ -75,8 +75,8 @@
 <body class=" bg-gray-100">
     <div class="  justify-items-center items-center relative top-28">
         <div class="text-center items-center justify-items-center  ">
-            <img src="{{URL::asset('/images/وزارة السياحة والاثار مصر.png')}}" alt="Logo" class="w-60 items-center m-auto  " >
-            <span  class="text-2xl font-semibold items-center content-center">   اهلا بكم فى قاعدة بيانات إدارة الحفائر قطاع الآثار المصرية</span>
+            <img src="{{URL::asset('/images/وزارة السياحة والاثار مصر.png')}}" alt="Logo" class="w-96 items-center m-auto  " >
+            <span  class="text-2xl font-semibold items-center content-center mt-20">   اهلا بكم فى قاعدة بيانات إدارة الحفائر قطاع الآثار المصرية</span>
             @if (Route::has('login'))
                 <div class=" flex-col items-center mt-6 ">
                     @auth
