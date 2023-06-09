@@ -9,9 +9,7 @@ border{
   
     border-color: rgb(253 230 138 / var(--tw-border-opacity));
 }
-.textcolor {
-    color: rgb(243 244 246 / var(--tw-text-opacity));
-}
+
 input:focus{
     --tw-border-opacity: 1;
     border-color: rgb(243 244 246 / var(--tw-border-opacity));

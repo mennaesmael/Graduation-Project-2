@@ -20,13 +20,13 @@
 
         <!-- Email Address -->
         <div class="items-center content-center  text-center">
-            <img src="{{URL::asset('/images/وزارة السياحة والاثار مصر.png')}}" alt="Logo" class="w-52 items-center m-auto  " >
+            <img src="{{URL::asset('/images/وزارة السياحة والاثار مصر.png')}}" alt="Logo" class="w-80 items-center m-auto ml-9  " >
             <span  class="text-2xl textcolor font-semibold  ">   تسجيل الدخول</span>
         </div>
         <div class="">
 
-            <x-input-label for="email" :value="__('البريد الالكتروني')" class=" m-4 textcolor"/>
-            <x-text-input id="email" class="block mt-1 w-full bg-gray-100t  focus:border-gray-100"
+            <x-input-label for="email" :value="__('البريد الالكتروني')" class=" m-4 "/>
+            <x-text-input id="email" class="block mt-1 w-full bg-gray-100  focus:border-gray-100"
              type="email" name="email" :value="old('email')" required
                 autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -34,7 +34,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('كلمة المرور')" class="textcolor m-4" />
+            <x-input-label for="password" :value="__('كلمة المرور')" class=" m-4" />
 
             <x-text-input id="password" class="block mt-1 w-full bg-gray-100" type="password" name="password" required
                 autocomplete="current-password" />
@@ -46,7 +46,7 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox"
-                    class="rounded  border-gray-300 dark:border-gray-700 text-gray-800 shadow-sm focus:ring-indigo-500 dark:focus:ring-orange-300 dark:focus:ring-offset-gray-800"
+                    class="rounded  border-gray-300 text-blue-500 shadow-sm  "
                     name="remember">
                 <span class="ml-2 px-3 py-3 text-sm  textcolor">{{ __('تذكرني') }}</span>
             </label>

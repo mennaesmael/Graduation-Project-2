@@ -197,14 +197,14 @@
                             <div class="flex w-full space-x-2 md:w-auto">
                                 <input
                                     class="w-full py-2 px-4 border border-gray-400 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                    type="text" name="query" placeholder="البحث عن ملف..."
+                                    type="text" name="query" placeholder="البحث ب أسم الملف"
                                     aria-label="Search by file name" style="width: 400px;" id="searchInput"
                                     list="suggestionsList">
                                 <datalist id="suggestionsList"></datalist>
 
                                 <input
                                     class="w-full py-2 px-4 border border-gray-400 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                    type="text" name="user_query" placeholder="..البحث باسم من رفع الملف"
+                                    type="text" name="user_query" placeholder="البحث ب اسم من رفع الملف"
                                     aria-label="Search by user name">
                                 <button
                                     class="bg-blue-700 hover:bg-blue-500 text-white font-bold

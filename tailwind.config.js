@@ -22,7 +22,7 @@ module.exports = {
         },
     },
     colors: {
-        any:'rgb(194,150,0)',
+       
         },
     plugins: [require('@tailwindcss/forms')],
 };

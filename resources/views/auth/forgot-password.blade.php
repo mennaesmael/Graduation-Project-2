@@ -18,7 +18,7 @@
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('البريد الالكتروني')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-text-input id="email" class="block mt-1 w-full bg-gray-100 " type="email" name="email" :value="old('email')" required autofocus />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
