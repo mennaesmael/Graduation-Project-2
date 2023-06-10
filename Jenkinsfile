@@ -1,16 +1,14 @@
 pipeline {
     agent any
-
     stages {
         stage('Install dependencies') {
             steps {
-                sh 'composer install'
+                bat 'composer install'
             }
         }
-
         stage('Run tests') {
             steps {
-                sh './vendor/bin/phpunit'
+                bat '.\\vendor\\bin\\phpunit'
             }
         }
     }
