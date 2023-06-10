@@ -8,6 +8,7 @@ pipeline {
         DB_DATABASE = 'governorate'
         DB_USERNAME = 'omarr'
         DB_PASSWORD = '123'
+        APP_KEY = 'base64:ikWs9zd2xPhKmdnhHu2ZczItUTKwLp8efOSFEFm/4uw='
     }
     stages {
         stage('Install dependencies') {
