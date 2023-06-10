@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PATH = "D:\\all programms\\xampp\\php;${env.PATH}"
+    }
     stages {
         stage('Install dependencies') {
             steps {
