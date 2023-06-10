@@ -10,16 +10,21 @@ pipeline {
         DB_PASSWORD = '123'
         APP_KEY = 'base64:ikWs9zd2xPhKmdnhHu2ZczItUTKwLp8efOSFEFm/4uw='
     }
-    stages {
-        stage('Install dependencies') {
-            steps {
-                bat 'composer install'
-            }
-        }
-        stage('Run tests') {
-            steps {
-                bat '.\\vendor\\bin\\phpunit'
-            }
-        }
-    }
-}
+ stages {
+           stage('Install dependencies') {
+               steps {
+                   bat 'composer install'
+               }
+           }
+           stage('Prepare database') {
+               steps {
+                   bat 'php artisan migrate:fresh --seed'
+               }
+           }
+           stage('Run tests') {
+               steps {
+                   bat '.\\vendor\\bin\\phpunit'
+               }
+           }
+       }
+   }
