@@ -5,7 +5,7 @@ pipeline {
         DB_CONNECTION = 'mysql'
         DB_HOST = '127.0.0.1'
         DB_PORT = '3306'
-        DB_DATABASE = 'governorate'
+        DB_DATABASE = 'governorate_test'
         DB_USERNAME = 'omarr'
         DB_PASSWORD = '123'
         APP_KEY = 'base64:ikWs9zd2xPhKmdnhHu2ZczItUTKwLp8efOSFEFm/4uw='
