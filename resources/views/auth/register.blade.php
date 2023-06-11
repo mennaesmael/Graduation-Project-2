@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>تسجيل العاملين-إدارة الحفائر قطاع الأثار المصرية-المجلس الاعلي للآثار</title>
+    <title>تسجيل المستخدمين-إدارة الحفائر قطاع الأثار المصرية-المجلس الاعلي للآثار</title>
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -35,7 +35,7 @@
                 data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-right="true">
                 <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
                     <li class="relative">
-                        <a class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                        <a href="{{route('dashboard')}}" class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
            text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50
            hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none
             active:bg-slate-50 active:text-inherit
@@ -90,7 +90,7 @@
               motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل المستخدمين الجدد </span>
 
                             </a>
 
@@ -106,7 +106,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
 
                             </a>
 
@@ -122,7 +122,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
 
                             </a>
 
@@ -155,7 +155,7 @@
                                 class="grid grid-cols-2  text-right gap-6  w-10/12  pr-11">
                                 @csrf
                                 <div class="items-center content-center  text-center col-span-2">
-                                    <span class="text-2xl font-semibold  "> تسجيل العاملين</span>
+                                    <span class="text-2xl font-semibold  "> تسجيل المستخدمين</span>
 
                                 </div>
 
@@ -210,10 +210,11 @@
                                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
 
                                 </div>
-                               
+
 
                                 <div class="flex items-center justify-front    col-span-2 ">
-                                    <x-primary-button class="ml-4 textcolor  bg-blue-700 hover:bg-blue-500 text-white font-bold
+                                    <x-primary-button
+                                        class="ml-4 textcolor  bg-blue-700 hover:bg-blue-500 text-white font-bold
                                     py-2 px-4 rounded-md focus:outline-none focus:shadow-outline  ">
                                         <span class="text-lg ">{{ __('تسجيل') }}</span>
 

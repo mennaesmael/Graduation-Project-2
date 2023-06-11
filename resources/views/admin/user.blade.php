@@ -17,7 +17,7 @@
 
 <body class="">
 
-    
+
     <div class="grid grid-cols-5  ">
 
 
@@ -31,7 +31,7 @@
                 data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-right="true">
                 <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
                     <li class="relative">
-                        <a class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                        <a href="{{route('dashboard')}}" class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
            text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50
            hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none
             active:bg-slate-50 active:text-inherit
@@ -86,7 +86,7 @@
               motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل المستخدمين الجدد </span>
 
                             </a>
 
@@ -102,7 +102,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
 
                             </a>
 
@@ -118,7 +118,7 @@
             motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
 
                             </a>
 
@@ -148,7 +148,9 @@
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <p class="card-title text-3xl font-semibold text-gray-900 mb-4 text-center m-8"> العاملين</p>
+                                            <p
+                                                class="card-title text-3xl font-semibold text-gray-900 mb-4 text-center m-8">
+                                                المستخدمين</p>
 
                                         </div>
                                         <div class="card-body">
@@ -165,7 +167,7 @@
                                                         placeholder=" البحث عن موظف عن طريق الاسم" required>
                                                 </div>
                                                 <button type="submit"
-                                                    class="items-center 
+                                                    class="items-center
                                                     p-2.5 mr-1 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -248,14 +250,14 @@
     </div>
 
     <footer
-    class="bg-neutral-100  text-neutral-600 dark:bg-gray-900 dark:text-neutral-200 lg:text-left inset-x-0 bottom-0 static
+        class="bg-neutral-100  text-neutral-600 dark:bg-gray-900 dark:text-neutral-200 lg:text-left inset-x-0 bottom-0 static
 overflow-hidden">
-    <div class="bg-neutral-200 p-6 text-left dark:bg-gray-900  ">
-        <span class="ml-96">المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
+        <div class="bg-neutral-200 p-6 text-left dark:bg-gray-900  ">
+            <span class="ml-96">المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
 
 
-    </div>
-</footer>
+        </div>
+    </footer>
 
 
 

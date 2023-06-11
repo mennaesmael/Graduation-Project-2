@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @vite('resources/css/app.css')
-    
+
     <title>الصفحة الرئيسية-إدارة الحفائر قطاع الأثار المصرية-المجلس الاعلي للآثار</title>
 
     <!-- Fonts -->
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css">
 
 
-    
+
     <style>
         button,
         button:focus {
@@ -33,7 +33,7 @@
         a,
         a:hover,
         a:focus {
-           
+
         }
 
         .pagination-links .page-link {
@@ -80,32 +80,32 @@
             @if (Route::has('login'))
                 <div class=" flex-col items-center mt-6 ">
                     @auth
-                       <div class="w-40  m-auto bg-gray-900 border-gray-500 rounded-full p-2.5 dark:hover:bg-gray-300 
+                       <div class="w-40  m-auto bg-gray-900 border-gray-500 rounded-full p-2.5 dark:hover:bg-gray-300
                        dark:hover:text-black">
                         <a href="{{ url('/dashboard') }}"
                         class="font-semibold   dark:text-gray-100
                          dark:hover:text-black ">الصفحة الرئيسية</a>
                        </div>
                     @else
-             
-                
+
+
                 <a href="{{ route('login') }}" class=" inline-block text-lg px-6 py-2 bg-gray-900 rounded-full text-gray-100" >{{ __('تسجيل الدخول') }}</a>
-               
+
 
                     @endauth
                 </div>
             @endif
         </div>
     </div>
-   
+
 
 
 
     <footer  class="bg-neutral-100  text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left absolute inset-x-0 bottom-0">
         <div class="bg-neutral-200 p-6 text-center dark:bg-gray-900  ">
             <span>المجلس الاعلي للآثار جميع الحقوق محفوظة 2023 © </span>
-          
-           
+
+
           </div>
     </footer>
 </body>

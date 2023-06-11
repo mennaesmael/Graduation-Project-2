@@ -36,7 +36,8 @@
                 data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-right="true">
                 <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
                     <li class="relative">
-                        <a class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
+                        <a href="{{ route('dashboard') }}"
+                            class="flex h-full cursor-pointer items-center truncate rounded-[5px] py-4 px-6 text-[0.875rem]
                text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50
                hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none
                 active:bg-slate-50 active:text-inherit
@@ -91,7 +92,7 @@
                   motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('register') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> تسجيل العاملين الجدد </span>
+                                <span class=" text-black text-center text-lg font-semibold"> تسجيل المستخدمين الجدد </span>
 
                             </a>
 
@@ -107,7 +108,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('workers') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> العاملين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> المستخدمين</span>
 
                             </a>
 
@@ -123,7 +124,7 @@
                 motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                                 data-te-sidenav-link-ref href="{{ route('tracking') }}">
 
-                                <span class=" text-black text-center text-lg font-semibold"> نشاط العاملين</span>
+                                <span class=" text-black text-center text-lg font-semibold"> نشاط المستخدمين</span>
 
                             </a>
 
@@ -159,9 +160,9 @@
                                                 <th>الأسم</th>
                                                 <th>الإيميل</th>
                                                 <th>أخر تسجيل دخول</th>
-                                                <th>عدد الملفات التي قمت برفعها  </th>
+                                                <th>عدد الملفات التي قمت برفعها </th>
                                                 @can('admin')
-                                                    <th>عدد الملفات التي رفعها الموظفين  </th>
+                                                    <th>عدد الملفات التي رفعها الموظفين </th>
                                                 @endcan
                                             </tr>
                                         </thead>
@@ -172,26 +173,10 @@
                                                 <td>{{ auth()->user()->email }}</td>
                                                 <td>{{ auth()->user()->last_login }}</td>
                                                 <td>
-                                                    <select>
-                                                        @foreach ($userFilesByMonth as $entry)
-                                                            <option value="{{ $entry->month }}-{{ $entry->year }}">
-                                                                {{ $entry->count }}
-                                                                ({{ $entry->month }}/{{ $entry->year }})
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
+                                                    {{ $totalUserFiles }} </td>
                                                 @can('admin')
                                                     <td>
-                                                        <select>
-                                                            @foreach ($filesByMonth as $entry)
-                                                                <option value="{{ $entry->month }}-{{ $entry->year }}">
-                                                                    {{ $entry->count }}
-                                                                    ({{ $entry->month }}/{{ $entry->year }})
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
+                                                        {{ $totalFiles }} </td>
                                                 @endcan
                                             </tr>
                                         </tbody>
@@ -205,4 +190,5 @@
 
     </div>
 </body>
+
 </html>
